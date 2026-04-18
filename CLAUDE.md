@@ -83,6 +83,7 @@ const theme = createSystem(defaultConfig, {
 - **Chakra コンポーネントをそのまま使う** のが基本
 - **カスタムコンポーネント** は、複数箇所で同じ Props の組み合わせを使う場合のみ作成
 - **variant** は Chakra のレシピ機能で定義（コンポーネント内で条件分岐しない）
+- **親子連動が必要な場合**: Context + Compound Component パターンを使用
 
 ```tsx
 // ✅ 正しい: Chakra をそのまま使う
@@ -108,6 +109,29 @@ export const MyButton = ({ variant, ...props }) => {
 
 **Autodocs を中心に据える** - TypeScript 型と JSDoc から自動生成されるドキュメントを活用。
 
+### 配置ルール
+
+**Co-location**: 実装ファイルと同じディレクトリに配置する。
+
+```
+src/theme/recipes/
+├── heading.ts
+├── heading.stories.tsx    ← 同階層
+├── text.ts
+└── text.stories.tsx
+```
+
+### title 階層構造
+
+```
+Theme/
+├── Recipes/          ← Chakra レシピ（Heading, Text）
+│   ├── Heading
+│   └── Text
+├── Tokens/           ← トークン展示（Colors, Spacing, etc.）
+└── Components/       ← カスタムコンポーネント
+```
+
 ### ストーリーの命名規則
 
 | 種類 | 命名 | 用途 |
@@ -117,33 +141,53 @@ export const MyButton = ({ variant, ...props }) => {
 | 機能有効化 | `With{Feature}` | 特定機能を ON にした状態 |
 | 使用例 | `{UseCase}Example` | 実際の使用シナリオ |
 
-### JSDoc コメントの徹底
+### argTypes で options を明示する
+
+TypeScript 型はコンパイル時に消えるため、Storybook の Controls には配列を渡す必要がある。
 
 ```tsx
-/**
- * Card Component
- *
- * コンテンツをグループ化するカードコンポーネント。
- */
-export function Card({
-  /** カードのタイトル */
-  title,
-  /** カードの内容 */
-  children,
-}: CardProps) {
+import { TYPOGRAPHY_VARIANTS, type TypographyVariant } from "./_typography-variants";
+
+const variantNames = Object.keys(TYPOGRAPHY_VARIANTS) as TypographyVariant[];
+
+const meta = {
+  argTypes: {
+    variant: {
+      options: [undefined, ...variantNames],
+      control: { type: "inline-radio" },
+    },
+  },
+} satisfies Meta<typeof Heading>;
 ```
+
+### Control Type の基本方針
+
+**`inline-radio` を優先** - 一覧性を重視し、選択肢が多くても `inline-radio` を使用する。
 
 ### 標準テンプレート
 
 ```tsx
-import type { Meta, StoryObj } from "@storybook/react";
-import { ComponentName } from "./ComponentName";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Box, Heading, VStack } from "@chakra-ui/react";
+import { TYPOGRAPHY_VARIANTS, type TypographyVariant } from "./_typography-variants";
+
+const variantNames = Object.keys(TYPOGRAPHY_VARIANTS) as TypographyVariant[];
 
 const meta = {
-  title: "Components/ComponentName",
-  component: ComponentName,
+  title: "Theme/Recipes/Heading",
+  component: Heading,
   tags: ["autodocs"],
-} satisfies Meta<typeof ComponentName>;
+  argTypes: {
+    variant: {
+      options: [undefined, ...variantNames],
+      control: { type: "inline-radio" },
+    },
+    as: {
+      options: ["h1", "h2", "h3", "h4", "h5", "h6"],
+      control: { type: "inline-radio" },
+    },
+  },
+} satisfies Meta<typeof Heading>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -151,10 +195,37 @@ type Story = StoryObj<typeof meta>;
 /** デフォルト状態 */
 export const Default: Story = {
   args: {
-    children: "Content",
+    children: "見出しテキスト",
+    as: "h2",
   },
 };
+
+/** 全バリアント一覧（カテゴリ別） */
+export const AllVariants: Story = {
+  render: () => (
+    <VStack align="start" gap={8}>
+      <Box>
+        <Heading as="h3" variant="titleMd" mb={3} color="gray.500">Display</Heading>
+        <VStack align="start" gap={2}>
+          <Heading as="h2" variant="displayLg">displayLg</Heading>
+          <Heading as="h2" variant="displayMd">displayMd</Heading>
+          <Heading as="h2" variant="displaySm">displaySm</Heading>
+        </VStack>
+      </Box>
+      {/* Headline, Title, Body, Label も同様にグループ化 */}
+    </VStack>
+  ),
+};
 ```
+
+### チェックリスト
+
+新しいストーリーを作成する際：
+
+- [ ] `tags: ["autodocs"]` を設定した
+- [ ] 配列ベースの Props を argTypes で options 指定した
+- [ ] `Default` Story を作成した
+- [ ] バリエーション展示用の Story を作成した
 
 ---
 
