@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Box, Heading, VStack } from "@chakra-ui/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { TYPOGRAPHY_VARIANTS, type TypographyVariant } from "./_typography-variants";
 
 const variantNames = Object.keys(TYPOGRAPHY_VARIANTS) as TypographyVariant[];

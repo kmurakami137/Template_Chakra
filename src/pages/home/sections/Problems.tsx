@@ -52,12 +52,7 @@ export function Problems() {
 					<GridItem>
 						<Box shadow="lg" borderRadius="lg" overflow="hidden">
 							<Box bg="blue.600" px={4} py={3}>
-								<Heading
-									as="h3"
-									variant="titleMd"
-									color="white"
-									textAlign="center"
-								>
+								<Heading as="h3" variant="titleMd" color="white" textAlign="center">
 									学習アプリの場合
 								</Heading>
 							</Box>
@@ -68,12 +63,7 @@ export function Problems() {
 									gap={0}
 									align="stretch"
 								>
-									<Flex
-										h={28}
-										align="center"
-										justify="center"
-										textAlign="center"
-									>
+									<Flex h={28} align="center" justify="center" textAlign="center">
 										<Text variant="titleLg">
 											<Mark>解説が簡潔</Mark>
 											すぎて
@@ -81,12 +71,7 @@ export function Problems() {
 											深い理解が得られない
 										</Text>
 									</Flex>
-									<Flex
-										h={28}
-										align="center"
-										justify="center"
-										textAlign="center"
-									>
+									<Flex h={28} align="center" justify="center" textAlign="center">
 										<Text variant="titleLg">
 											間違えた選択肢に解説がなく
 											<Br />
@@ -94,12 +79,7 @@ export function Problems() {
 											する
 										</Text>
 									</Flex>
-									<Flex
-										h={28}
-										align="center"
-										justify="center"
-										textAlign="center"
-									>
+									<Flex h={28} align="center" justify="center" textAlign="center">
 										<Text variant="titleLg">
 											内容が
 											<Mark>教科書や受験</Mark>
@@ -117,12 +97,7 @@ export function Problems() {
 					<GridItem>
 						<Box shadow="lg" borderRadius="lg" overflow="hidden">
 							<Box bg="blue.600" px={4} py={3}>
-								<Heading
-									as="h3"
-									variant="titleMd"
-									color="white"
-									textAlign="center"
-								>
+								<Heading as="h3" variant="titleMd" color="white" textAlign="center">
 									参考書の場合
 								</Heading>
 							</Box>
@@ -133,12 +108,7 @@ export function Problems() {
 									gap={0}
 									align="stretch"
 								>
-									<Flex
-										h={28}
-										align="center"
-										justify="center"
-										textAlign="center"
-									>
+									<Flex h={28} align="center" justify="center" textAlign="center">
 										<Text variant="titleLg">
 											参考書・問題集・用語集など
 											<Br />
@@ -147,24 +117,14 @@ export function Problems() {
 											<Mark>集中力が途切れる</Mark>
 										</Text>
 									</Flex>
-									<Flex
-										h={28}
-										align="center"
-										justify="center"
-										textAlign="center"
-									>
+									<Flex h={28} align="center" justify="center" textAlign="center">
 										<Text variant="titleLg">
 											章ごとや用語ごとに解説されるため
 											<Br />
 											<Mark>つながりや流れが見えにくい</Mark>
 										</Text>
 									</Flex>
-									<Flex
-										h={28}
-										align="center"
-										justify="center"
-										textAlign="center"
-									>
+									<Flex h={28} align="center" justify="center" textAlign="center">
 										<Text variant="titleLg">
 											スキマ時間に
 											<Mark>手軽に勉強</Mark>
@@ -190,12 +150,7 @@ export function Problems() {
 							overflow="hidden"
 						>
 							<Box bg="blue.600" px={4} py={3}>
-								<Heading
-									as="h3"
-									variant="titleMd"
-									color="white"
-									textAlign="center"
-								>
+								<Heading as="h3" variant="titleMd" color="white" textAlign="center">
 									塾の場合
 								</Heading>
 							</Box>
@@ -206,12 +161,7 @@ export function Problems() {
 									gap={0}
 									align="stretch"
 								>
-									<Flex
-										h={28}
-										align="center"
-										justify="center"
-										textAlign="center"
-									>
+									<Flex h={28} align="center" justify="center" textAlign="center">
 										<Text variant="titleLg">
 											聞き逃した部分を
 											<Mark>
@@ -221,12 +171,7 @@ export function Problems() {
 											</Mark>
 										</Text>
 									</Flex>
-									<Flex
-										h={28}
-										align="center"
-										justify="center"
-										textAlign="center"
-									>
+									<Flex h={28} align="center" justify="center" textAlign="center">
 										<Text variant="titleLg">
 											<Mark>予習・復習のペース</Mark>
 											を作るのが難しく
@@ -236,12 +181,7 @@ export function Problems() {
 											<Br />
 										</Text>
 									</Flex>
-									<Flex
-										h={28}
-										align="center"
-										justify="center"
-										textAlign="center"
-									>
+									<Flex h={28} align="center" justify="center" textAlign="center">
 										<Text variant="titleLg">
 											成績アップに注力するため
 											<Br />

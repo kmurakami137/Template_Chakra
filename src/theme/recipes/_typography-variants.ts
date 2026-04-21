@@ -32,16 +32,52 @@ export const TYPOGRAPHY_VARIANTS = {
 	// ============================================
 	// Body - 本文（両端揃え）
 	// ============================================
-	bodyLg: { "&&": { fontSize: "lg", fontWeight: "moderate", lineHeight: "taller", letterSpacing: "wide", textAlign: "justify" } },
-	bodyMd: { "&&": { fontSize: "md", fontWeight: "moderate", lineHeight: "tall", textAlign: "justify" } },
-	bodySm: { "&&": { fontSize: "sm", fontWeight: "moderate", lineHeight: "tall", textAlign: "justify" } },
+	bodyLg: {
+		"&&": {
+			fontSize: "lg",
+			fontWeight: "moderate",
+			lineHeight: "taller",
+			letterSpacing: "wide",
+			textAlign: "justify",
+		},
+	},
+	bodyMd: {
+		"&&": { fontSize: "md", fontWeight: "moderate", lineHeight: "tall", textAlign: "justify" },
+	},
+	bodySm: {
+		"&&": { fontSize: "sm", fontWeight: "moderate", lineHeight: "tall", textAlign: "justify" },
+	},
 
 	// ============================================
 	// Label - ラベル、キャプション、注釈（両端揃え）
 	// ============================================
-	labelLg: { "&&": { fontSize: "sm", fontWeight: "normal", lineHeight: "moderate", letterSpacing: "wide", textAlign: "justify" } },
-	labelMd: { "&&": { fontSize: "xs", fontWeight: "normal", lineHeight: "moderate", letterSpacing: "wide", textAlign: "justify" } },
-	labelSm: { "&&": { fontSize: "2xs", fontWeight: "normal", lineHeight: "moderate", letterSpacing: "wide", textAlign: "justify" } },
+	labelLg: {
+		"&&": {
+			fontSize: "sm",
+			fontWeight: "normal",
+			lineHeight: "moderate",
+			letterSpacing: "wide",
+			textAlign: "justify",
+		},
+	},
+	labelMd: {
+		"&&": {
+			fontSize: "xs",
+			fontWeight: "normal",
+			lineHeight: "moderate",
+			letterSpacing: "wide",
+			textAlign: "justify",
+		},
+	},
+	labelSm: {
+		"&&": {
+			fontSize: "2xs",
+			fontWeight: "normal",
+			lineHeight: "moderate",
+			letterSpacing: "wide",
+			textAlign: "justify",
+		},
+	},
 } as const;
 
 /** バリアント名の型 */

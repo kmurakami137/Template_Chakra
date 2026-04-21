@@ -23,8 +23,8 @@
  * </FeatureDetails>
  */
 
-import { createContext, useContext, type ReactNode } from "react";
 import { Box, Flex, Grid, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react";
+import { createContext, type ReactNode, useContext } from "react";
 import { FaStar } from "react-icons/fa6";
 
 // ============================================================================
@@ -57,6 +57,9 @@ type FeatureDetailsProps = {
 	/** アイコンの色（子に伝播） */
 	iconColor: string;
 	children: ReactNode;
+	pt?: number | string;
+	pb?: number | string;
+	py?: number | string;
 };
 
 function FeatureDetailsRoot({
@@ -64,11 +67,19 @@ function FeatureDetailsRoot({
 	columns = 3,
 	iconColor,
 	children,
+	pt = 12,
+	pb,
+	py,
 }: FeatureDetailsProps) {
 	return (
 		<FeatureDetailsContext.Provider value={{ layout, iconColor }}>
 			{layout === "column" ? (
-				<Grid templateColumns={{ base: "1fr", md: `repeat(${columns}, 1fr)` }} gap={8}>
+				<Grid
+					templateColumns={{ base: "1fr", md: `repeat(${columns}, 1fr)` }}
+					gap={8}
+					pt={pt ?? py}
+					pb={pb ?? py}
+				>
 					{children}
 				</Grid>
 			) : (
@@ -175,7 +186,7 @@ function FeatureDetailItem({
 		return (
 			<Flex direction="column" {...ITEM_CONTAINER_STYLES}>
 				{headerContent}
-				<Box mb={4} flexGrow={1}>
+				<Box mb={6} flexGrow={1}>
 					{descriptionContent}
 				</Box>
 				{imageContent}

@@ -1,5 +1,5 @@
-import type { Preview } from "@storybook/react-vite";
 import { ChakraProvider } from "@chakra-ui/react";
+import type { Preview } from "@storybook/react-vite";
 import { system } from "../src/theme";
 
 const preview: Preview = {

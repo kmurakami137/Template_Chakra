@@ -12,7 +12,7 @@ export const markRecipe = defineRecipe({
 	className: "mark",
 	base: {
 		display: "inline",
-		bg: "#ebe29c",
+		bg: "#efe596",
 		color: "inherit",
 		fontWeight: "inherit",
 		px: 1,

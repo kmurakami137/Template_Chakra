@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Box, Text } from "@chakra-ui/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Br } from "./Br";
 
 const BREAKPOINTS = ["sm", "md", "lg", "xl", "2xl"] as const;
@@ -58,7 +58,9 @@ export const UsageExample: Story = {
 	render: () => (
 		<Box p={4}>
 			<Text variant="bodyLg" mb={4}>
-				<Text as="span" fontWeight="bold">デフォルト（md以上で改行）:</Text>
+				<Text as="span" fontWeight="bold">
+					デフォルト（md以上で改行）:
+				</Text>
 			</Text>
 			<Box bg="blue.50" p={3} borderRadius="md" mb={6}>
 				<Text>
@@ -69,8 +71,10 @@ export const UsageExample: Story = {
 			</Box>
 
 			<Text variant="bodyLg" mb={4}>
-				<Text as="span" fontWeight="bold">hideFrom="md":</Text>
-				{" "}モバイルでは改行、デスクトップでは1行
+				<Text as="span" fontWeight="bold">
+					hideFrom="md":
+				</Text>{" "}
+				モバイルでは改行、デスクトップでは1行
 			</Text>
 			<Box bg="green.50" p={3} borderRadius="md">
 				<Text>

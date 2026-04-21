@@ -3,16 +3,23 @@
  *
  * 個別Feature用のラッパーコンポーネント
  * セマンティックHTML: <article> を使用
- * features 配列から index でデータを取得
+ * features 配列から index で label を取得
+ * subtitle と description は Features.tsx から直接渡す
+ * Container を内包し、FeatureItemごとに背景色を設定可能
  *
  * @example
- * <FeatureItem index={0}>
+ * <FeatureItem
+ *   index={0}
+ *   bg="gray.50"
+ *   subtitle="サブタイトル"
+ *   description={<>説明文</>}
+ * >
  *   {children}
  * </FeatureItem>
  */
 
+import { Box, Container, Heading, Text } from "@chakra-ui/react";
 import type { ReactNode } from "react";
-import { Box, Heading, Text } from "@chakra-ui/react";
 import { features } from "../data/features";
 
 type FeatureItemProps = {
@@ -24,53 +31,74 @@ type FeatureItemProps = {
 	isLast?: boolean;
 	/** 背景要素（position: absolute で配置される） */
 	bgImage?: ReactNode;
+	/** サブタイトル（Features.tsx から渡す） */
+	subtitle?: ReactNode;
+	/** 説明テキスト（Features.tsx から渡す） */
+	description?: ReactNode;
+	/** 背景色 */
+	bg?: string;
+	/** テキスト色 */
+	color?: string;
+	/** 垂直方向のpadding */
+	pt?: number | string;
+	pb?: number | string;
+	py?: number | string;
 };
 
-export function FeatureItem({ index, children, isLast = false, bgImage }: FeatureItemProps) {
+export function FeatureItem({
+	index,
+	children,
+	isLast = false,
+	bgImage,
+	subtitle,
+	description,
+	bg = "gray.100",
+	color = "gray.900",
+	pt,
+	pb,
+	py = 20,
+}: FeatureItemProps) {
 	const feature = features[index];
-	const { label, subtitle, description } = feature;
-
+	const { label } = feature;
 	return (
-		<Box
-			as="article"
-			position="relative"
-			py={12}
-			borderBottomWidth={isLast ? 0 : "1px"}
-			borderColor="gray.200"
-		>
-			{/* 背景要素（最背面） */}
-			{bgImage}
-			{/* コンテンツ（前面） */}
-			<Box position="relative" zIndex={1}>
-				{/* 番号 */}
-				<Text
-					fontFamily="en.poppins"
-					fontSize="8xl"
-					color="gray.200"
-					fontWeight="semibold"
-					lineHeight={1}
+		<Box as="article" position="relative" bg={bg} color={color} pt={pt ?? py} pb={pb ?? py}>
+			{/* Container でコンテンツを中央揃え */}
+			<Container maxW="breakpoint-xl" position="relative" zIndex={1}>
+				{/* 背景要素（最背面） */}
+				{bgImage}
+				<Box
+					py={12}
+					borderBottomWidth={isLast ? 0 : "1px"}
+					borderColor={color === "white" ? "gray.200" : "whiteAlpha.200"}
+					position="relative"
+					zIndex={2}
 				>
-					{String(index + 1).padStart(2, "0")}
-				</Text>
-				{/* タイトル */}
-				<Heading as="h3" variant="displaySm" mb={6}>
-					{label}
-				</Heading>
-				{/* サブタイトル */}
-				{subtitle && (
-					<Heading as="h4" variant="headlineLg" mb={2}>
-						{subtitle}
-					</Heading>
-				)}
-				{/* 説明テキスト */}
-				{description && (
-					<Text variant="bodyMd" mb={12}>
-						{description}
+					{/* 番号 */}
+					<Text
+						fontFamily="en.poppins"
+						fontSize="8xl"
+						color="gray.200"
+						fontWeight="semibold"
+						lineHeight={1}
+					>
+						{String(index + 1).padStart(2, "0")}
 					</Text>
-				)}
-				{/* コンテンツ */}
-				{children}
-			</Box>
+					{/* タイトル */}
+					<Heading as="h3" variant="displaySm" mb={6}>
+						{label}
+					</Heading>
+					{/* サブタイトル */}
+					{subtitle && (
+						<Heading as="h4" variant="headlineLg" mb={2}>
+							{subtitle}
+						</Heading>
+					)}
+					{/* 説明テキスト */}
+					{description && <Text variant="bodyMd">{description}</Text>}
+					{/* コンテンツ */}
+					{children}
+				</Box>
+			</Container>
 		</Box>
 	);
 }

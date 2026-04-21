@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Box, Heading, Text, VStack } from "@chakra-ui/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { TYPOGRAPHY_VARIANTS, type TypographyVariant } from "./_typography-variants";
 
 const variantNames = Object.keys(TYPOGRAPHY_VARIANTS) as TypographyVariant[];
@@ -98,7 +98,9 @@ export const AllVariants: Story = {
 					<Text variant="bodyMd">
 						bodyMd - 標準の本文サイズ。一般的な記事やコンテンツの本文に使用します。
 					</Text>
-					<Text variant="bodySm">bodySm - 小さめの本文。補足説明や注釈などに使用します。</Text>
+					<Text variant="bodySm">
+						bodySm - 小さめの本文。補足説明や注釈などに使用します。
+					</Text>
 				</VStack>
 			</Box>
 
@@ -122,7 +124,9 @@ export const LargeNonHeadingExample: Story = {
 	render: () => (
 		<VStack align="start" gap={4}>
 			<Text variant="displayLg">セマンティックには段落だが、視覚的にはヒーローサイズ</Text>
-			<Text variant="headlineMd">サブキャッチコピーなど、見出しではないが目立たせたいテキスト</Text>
+			<Text variant="headlineMd">
+				サブキャッチコピーなど、見出しではないが目立たせたいテキスト
+			</Text>
 		</VStack>
 	),
 };

@@ -5,14 +5,7 @@
  */
 
 import { Box } from "@chakra-ui/react";
-import {
-	Hero,
-	Intro,
-	Problems,
-	Features,
-	Faq,
-	Cta,
-} from "./sections";
+import { Cta, Faq, Features, Hero, Intro, Problems } from "./sections";
 
 export function HomePage() {
 	return (

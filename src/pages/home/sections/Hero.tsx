@@ -4,22 +4,12 @@
  * ヒーローセクション - メインビジュアルとキャッチコピー
  */
 
-import {
-	Box,
-	Container,
-	Heading,
-	HStack,
-	Icon,
-	Image,
-	Text,
-	VStack,
-} from "@chakra-ui/react";
-import { Br } from "../../../components";
-import { apps } from "../../../data/apps";
-
+import { Box, Container, Heading, HStack, Icon, Image, Text, VStack } from "@chakra-ui/react";
 import { RiSparklingFill } from "react-icons/ri";
 import LynxLogo from "../../../assets/Lynx-Logo.svg?react";
 import neko from "../../../assets/neko3.svg";
+import { Br } from "../../../components";
+import { apps } from "../../../data/apps";
 
 // ヒーローに表示する統計情報
 const heroStats = [
@@ -30,14 +20,7 @@ const heroStats = [
 
 export function Hero() {
 	return (
-		<Box
-			as="section"
-			bg="blue.600"
-			py={28}
-			color="white"
-			position="relative"
-			overflow="hidden"
-		>
+		<Box as="section" bg="blue.600" py={28} color="white" position="relative" overflow="hidden">
 			{/* 背景 SVG - 親要素より大きく配置してはみ出しをclip */}
 			<Image
 				src={neko}

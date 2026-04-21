@@ -5,9 +5,9 @@
  * 表示時は formatXxx 関数で適切に丸める
  */
 
-import hisIcon from "../assets/his_icon_store.png";
-import geoIcon from "../assets/geo_icon_store.png";
 import civIcon from "../assets/civ_icon_store.png";
+import geoIcon from "../assets/geo_icon_store.png";
+import hisIcon from "../assets/his_icon_store.png";
 
 // ============================================
 // 型定義
@@ -97,8 +97,7 @@ export const formatNumber = (n: number): string => n.toLocaleString();
  * @param unit - 丸める単位（10, 100, 10000 など）
  * @returns 丸めた値
  */
-export const roundDown = (value: number, unit: number): number =>
-	Math.floor(value / unit) * unit;
+export const roundDown = (value: number, unit: number): number => Math.floor(value / unit) * unit;
 
 /**
  * 数値を指定単位で丸めてフォーマット
@@ -112,11 +111,7 @@ export const roundDown = (value: number, unit: number): number =>
  * formatRounded(4406, 100)         // → "4,400"（問題数・用語数）
  * formatRounded(2884773, 10000, 10000) // → "288"（万単位）
  */
-export const formatRounded = (
-	value: number,
-	unit: number,
-	divideBy?: number,
-): string => {
+export const formatRounded = (value: number, unit: number, divideBy?: number): string => {
 	const rounded = roundDown(value, unit);
 	const displayValue = divideBy ? Math.floor(rounded / divideBy) : rounded;
 	return formatNumber(displayValue);

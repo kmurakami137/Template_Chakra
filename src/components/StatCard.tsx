@@ -109,16 +109,10 @@ export function StatCard({ label, appDataKey, apps }: StatCardProps) {
 			color="cyan.600"
 			rounded="lg"
 			overflow="hidden"
-			mt="auto"
+			mt="4"
 		>
 			{/* 左: ラベル+数値 */}
-			<Flex
-				flex={1}
-				direction="column"
-				align="center"
-				justify="center"
-				py={2}
-			>
+			<Flex flex={1} direction="column" align="center" justify="center" py={2}>
 				<Text variant="titleMd">{label}</Text>
 				<Text variant="headlineMd" fontFamily="en.poppins">
 					{formatTotal(total, appDataKey)}

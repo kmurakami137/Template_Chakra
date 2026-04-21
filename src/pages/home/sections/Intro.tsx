@@ -4,18 +4,9 @@
  * 「暗記の先を行く」セクション - 3つの特徴カード
  */
 
-import {
-	Box,
-	Container,
-	Grid,
-	GridItem,
-	Heading,
-	Icon,
-	Text,
-} from "@chakra-ui/react";
-import { Br } from "../../../components";
-
+import { Box, Container, Grid, GridItem, Heading, Icon, Text } from "@chakra-ui/react";
 import { LiaCrownSolid } from "react-icons/lia";
+import { Br } from "../../../components";
 
 export function Intro() {
 	return (
