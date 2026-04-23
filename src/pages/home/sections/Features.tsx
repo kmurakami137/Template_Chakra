@@ -4,7 +4,7 @@
  * FEATURES セクション（概要カード + 詳細機能紹介）
  */
 
-import { Box, Container, Flex, Heading, Image, Mark, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Image, Mark, Text } from "@chakra-ui/react";
 import glossaryImage from "../../../assets/1x/glossary.png";
 import questionImage from "../../../assets/1x/question.png";
 import stagesImage from "../../../assets/1x/stages.png";
@@ -20,6 +20,8 @@ import {
 	FeatureDetails,
 	FeatureItem,
 	FeatureSummaryCard,
+	Section,
+	SectionHeader,
 	StatCard,
 } from "../../../components";
 import { apps, formatRounded, totals } from "../../../data/apps";
@@ -28,29 +30,22 @@ import { features } from "../../../data/features";
 
 export function Features() {
 	return (
-		<Box as="section">
+		<Box>
 			{/* 概要セクション（青背景） */}
-			<Box bg="blue.600" color="white" py={28}>
+			<Section bg="blue.800" color="white">
 				<Container maxW="breakpoint-xl">
-					{/* ヘッダー */}
-					<Text
-						fontFamily="en.poppins"
-						fontSize="3xl"
-						mb={1}
-						color="blue.300"
-						fontWeight="bold"
-						textAlign="center"
-					>
-						FEATURES
-					</Text>
-					<Heading as="h2" mb={4} letterSpacing="wide" textAlign="center">
-						LYNXが選ばれる理由
-					</Heading>
-					<Text variant="bodyMd" mb={10} textAlign="center">
-						最高峰の学習体験で、快適でありながら、深い理解をつちかいます。
-						<Br />
-						社会科を楽しくマスターしよう！
-					</Text>
+					<SectionHeader
+						titleEn="FEATURES"
+						titleJa="LYNXが選ばれる理由"
+						labelColor="blue.300"
+						description={
+							<>
+								最高峰の学習体験で、快適でありながら、深い理解をつちかいます。
+								<Br />
+								社会科を楽しくマスターしよう！
+							</>
+						}
+					/>
 
 					{/* 特徴カード */}
 					<Flex color="black" wrap="wrap" gap={3} justifyContent="center">
@@ -92,19 +87,15 @@ export function Features() {
 						学習アプリの解説の総文字数を比較。LYNXは、地理・歴史・公民分野を合計して300万字以上の解説を収録しています。
 					</Text>
 				</Container>
-			</Box>
+			</Section>
 
 			{/* 詳細セクション */}
 			{/* Feature 1: 問題集×用語集×参考書 */}
 			<FeatureItem
 				index={0}
-				bg="gray.50"
 				subtitle="3つの役割が、1つにつながる"
 				description={
 					<>
-						問題を解いて疑問が生まれたら、すぐに詳しい解説へ。
-						気になる用語はタップひとつで背景まで理解。
-						<Br />
 						3冊分の役割が
 						<Mark>シームレスにつながる</Mark>ことで、
 						<Mark>紙の教材では得られない学習体験</Mark>を実現します。
@@ -116,13 +107,11 @@ export function Features() {
 						title="テストに強い問題集"
 						description={
 							<>
-								<Mark>定期テストから高校受験まで</Mark>
-								幅広く収録。自分のレベルに合わせて段階的に挑戦でき、疑問が生まれたら
-								<Mark>間違えた選択肢も含めて解説で確認</Mark>できます。
+								<Mark>定期テストから高校受験まで 幅広く対応。</Mark>
+								自分のレベルに合わせて段階的に挑戦できます。
 							</>
 						}
 						image={questionImage}
-						imageLabel="問題一覧画面"
 						footer={<StatCard label="問題数" appDataKey="questions" apps={apps} />}
 					/>
 					<FeatureDetails.Item
@@ -130,26 +119,22 @@ export function Features() {
 						description={
 							<>
 								選択した範囲の用語を、
-								<Mark>重要度別に自動でリストアップ</Mark>
-								。ステージ挑戦前後や、問題演習の合間など、
-								<Mark>様々なタイミング</Mark>
+								<Mark>重要度別に自動でリストアップ</Mark>。 様々なタイミング
 								でタップひとつで用語解説を確認できます。
 							</>
 						}
 						image={glossaryImage}
-						imageLabel="用語集画面"
 						footer={<StatCard label="用語数" appDataKey="terms" apps={apps} />}
 					/>
 					<FeatureDetails.Item
 						title="参考書レベルの解説"
 						description={
 							<>
-								概要だけでなく、<Mark>背景や流れまで</Mark>
-								丁寧に解説。問題を解いて生まれた疑問も、用語の深い意味も、すぐに確認できます。
+								概要だけでなく、<Mark>背景や流れまで 丁寧に解説</Mark>
+								。問題を解いて生まれた疑問も、用語の深い意味も、すぐに確認できます。
 							</>
 						}
 						image={stagesImage}
-						imageLabel="範囲選択画面"
 						footer={
 							<StatCard
 								label="コンテンツ文字数"
@@ -165,10 +150,9 @@ export function Features() {
 
 			<FeatureItem
 				index={1}
-				bg="white"
 				subtitle="「なぜ？」がわかる、体系的な解説"
 				description={
-					<Text as="span" bg="gray.50" py="1" pr="3">
+					<Text as="span" bg="inherit" py="1" pr="3">
 						地理・歴史・公民合計300万字以上。
 						<Mark>社会科アプリNo.1※のコンテンツ量</Mark>
 						による、「わかりやすさ」が好評です。
@@ -209,15 +193,13 @@ export function Features() {
 						description="重要ポイントはマーカーで強調。関連用語もナビゲート。ステージへの挑戦前も、挑戦後も、間違えた選択肢も。解説にすぐアクセスできます。"
 					/>
 				</FeatureDetails>
+				{/* 解説の実例 */}
+				<ExplanationShowcase examples={explanationExamples} />
 			</FeatureItem>
-
-			{/* 解説の実例 */}
-			<ExplanationShowcase examples={explanationExamples} />
 
 			{/* Feature 3: 関連学習 */}
 			<FeatureItem
 				index={2}
-				bg="gray.50"
 				description={
 					<>
 						社会科の学習は、何がきっかけとなったのか？その影響で何が起こったか？など、つながりを理解することがとても大切です。
@@ -254,41 +236,53 @@ export function Features() {
 			{/* Feature 4: 自由に選べる学習範囲 */}
 			<FeatureItem
 				index={3}
-				bg="white"
-				isLast
-				subtitle="大きな範囲も、小さな範囲も、自由自在"
+				// subtitle="大きな範囲も、小さな範囲も、自由自在"
 				description={
 					<>
-						LYNXは独自の<Mark>ツリー構造</Mark>で学習範囲を管理。
-						「世界地理」のような大きな単元から「ヨーロッパの農業」のような細かいテーマまで、
-						<Mark>自分のペースに合わせて自由に選択</Mark>できます。
+						550以上のステージ。 範囲選択が柔軟だから、
+						<Mark>自分のペースに合わせて学習</Mark>できます。
 						<Br />
-						選んだ範囲の用語や解説を<Mark>挑戦前に確認</Mark>できるから、
-						予習も復習も効率的に進められます。
+						目的に応じた効率的な学習ができます。。
 					</>
 				}
 			>
 				<FeatureDetails iconColor={features[3].color}>
 					<FeatureDetails.Item
-						title="自由な範囲選択"
-						description="「日本の地域」のような大単元から「関東地方の自然」のような細かいテーマまで、ツリー構造で自在に絞り込み"
-						image="placeholder"
-						imageAspectRatio={16 / 9}
-						imageLabel="予習画面"
+						title="大きな範囲も、小さな範囲も"
+						description={
+							<>
+								「日本の地域」のような大単元から「関東地方の自然」のような細かいテーマまで、
+								<Mark>自由に絞り込み</Mark>できます。
+							</>
+						}
+						image={stagesImage}
+						imageAspectRatio={1 / 1}
 					/>
 					<FeatureDetails.Item
 						title="テスト対策に最適"
-						description="定期テストは学習範囲を絞って効率的に。受験対策は広い範囲でまとめて復習。目的に合わせた使い分けができる"
+						description={
+							<>
+								<Mark>定期テスト</Mark>は学習範囲を絞って効率的に。
+								<Mark>受験対策</Mark>
+								には広い範囲でまとめて復習。目的に合わせた使い分けができます。
+							</>
+						}
 						image="placeholder"
-						imageAspectRatio={16 / 9}
-						imageLabel="演習画面"
+						imageAspectRatio={1 / 1}
 					/>
 					<FeatureDetails.Item
-						title="挑戦前の確認"
-						description="選んだ範囲の用語一覧や解説を事前にチェック。知識を整理してから挑戦できるので、予習にも復習にも効果的"
+						title={
+							<>
+								進捗率がひと目で確認できる
+								<Br />
+								{formatRounded(totals.stages, 10)}
+								以上のステージ
+							</>
+						}
+						description={<>{formatRounded(totals.stages, 10)}以上のステージ</>}
 						image="placeholder"
 						imageAspectRatio={16 / 9}
-						imageLabel="復習画面"
+						footer={<StatCard label="ステージ数" appDataKey="stages" apps={apps} />}
 					/>
 				</FeatureDetails>
 			</FeatureItem>
@@ -296,7 +290,77 @@ export function Features() {
 			{/* Feature 5: 理解が定着する学習サイクル */}
 			<FeatureItem
 				index={4}
-				bg="gray.100"
+				// subtitle="大きな範囲も、小さな範囲も、自由自在"
+				description={
+					<>
+						「予習」・「演習」・「復習」の学習サイクルが自然にできる設計です。
+						<Br />
+						通知機能や進捗管理、苦手分析など、継続学習を強力にサポートする機能も充実。
+					</>
+				}
+			>
+				<FeatureDetails iconColor={features[4].color}>
+					<FeatureDetails.Item
+						title="ステージ選択画面で予習・復習"
+						description={
+							<>
+								範囲を選ぶと、その範囲の重要度ごとの用語一覧や、間違えたことのある用語一覧が表示されます。詳しい解説にアクセスして、挑戦の準備をしましょう。
+							</>
+						}
+						image="placeholder"
+						imageAspectRatio={16 / 9}
+					/>
+					<FeatureDetails.Item
+						title="ステージ挑戦中に即復習！"
+						description={
+							<>
+								ステージでは、1問挑戦ごとに解説が表示され、復習ができます。
+								<Mark>正答以外の選択肢や、関連キーワードの解説も確認</Mark>
+								できるため、理解が深まります 。
+							</>
+						}
+						image="placeholder"
+						imageAspectRatio={16 / 9}
+					/>
+					<FeatureDetails.Item
+						title="復習"
+						description={
+							<>
+								ステージ挑戦後も全体の復習ができます。間違えた問題はよく確認して次の挑戦にそなえましょう。理解度や進捗率もチェックして、マスターを目指そう。
+							</>
+						}
+						image="placeholder"
+						imageAspectRatio={16 / 9}
+					/>
+				</FeatureDetails>
+				<FeatureDetails columns={2}>
+					<FeatureDetails.Item
+						title="通知機能"
+						description={
+							<>
+								ステージでは、1問挑戦ごとに解説が表示され、復習ができます。
+								<Mark>間違えた選択肢や、その他の選択肢の解説も確認</Mark>
+								できるため、理解が深まります 。
+							</>
+						}
+						image="placeholder"
+						imageAspectRatio={16 / 9}
+					/>
+					<FeatureDetails.Item
+						title="グラフ表示"
+						description={
+							<>
+								ステージ挑戦後も全体の復習ができます。間違えた問題はよく確認して次の挑戦にそなえましょう。理解度や進捗率もチェックして、マスターを目指そう。
+							</>
+						}
+						image="placeholder"
+						imageAspectRatio={16 / 9}
+					/>
+				</FeatureDetails>
+			</FeatureItem>
+			{/* Feature 6: 苦手克服を手厚くサポート */}
+			<FeatureItem
+				index={5}
 				isLast
 				subtitle="大きな範囲も、小さな範囲も、自由自在"
 				description={
@@ -310,7 +374,7 @@ export function Features() {
 					</>
 				}
 			>
-				<FeatureDetails iconColor={features[4].color}>
+				<FeatureDetails iconColor={features[5].color}>
 					<FeatureDetails.Item
 						title="予習"
 						description="範囲を選ぶと、その範囲の重要度ごとの用語一覧や、間違えたことのある用語一覧が表示されます。詳しい解説にアクセスして、挑戦の準備をしましょう。"

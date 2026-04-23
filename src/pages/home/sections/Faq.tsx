@@ -5,24 +5,13 @@
  */
 
 import { Box, Container, Grid, Heading, Text } from "@chakra-ui/react";
+import { Section, SectionHeader } from "../../../components";
 
 export function Faq() {
 	return (
-		<Box as="section" bg="gray.100" color="gray.900" py={28}>
+		<Section py={28} bg="gray.100" color="gray.900">
 			<Container maxW="breakpoint-xl">
-				{/* ヘッダー */}
-				<Text
-					fontFamily="en.poppins"
-					fontSize="xl"
-					mb={1}
-					fontWeight="bold"
-					textAlign="center"
-				>
-					FAQ
-				</Text>
-				<Heading as="h2" mb={16} textAlign="center">
-					よくあるご質問
-				</Heading>
+				<SectionHeader titleEn="FAQ" titleJa="よくあるご質問" mb={16} />
 
 				{/* FAQ カード */}
 				<Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={6}>
@@ -58,6 +47,6 @@ export function Faq() {
 					</Box>
 				</Grid>
 			</Container>
-		</Box>
+		</Section>
 	);
 }

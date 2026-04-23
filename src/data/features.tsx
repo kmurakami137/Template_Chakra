@@ -26,7 +26,7 @@ export const features: Feature[] = [
 	{
 		id: "cross-reference",
 		icon: LuBookOpenText,
-		color: "cyan.600",
+		color: "blue.500",
 		label: "問題集×用語集×参考書",
 	},
 	{
@@ -44,7 +44,8 @@ export const features: Feature[] = [
 	{
 		id: "flexible-range",
 		icon: LuListTree,
-		color: "orange.600",
+		// color: "orange.600",
+		color: "blue.500",
 		label: "自由に選べる学習範囲",
 		subtitle: "大きな範囲も、小さな範囲も、自由自在",
 		description: (

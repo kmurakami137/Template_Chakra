@@ -1,6 +1,9 @@
+export { AppStats } from "./AppStats";
 export { Br } from "./Br";
 export { ExplanationShowcase } from "./ExplanationShowcase";
 export { FeatureDetails } from "./FeatureDetails";
 export { FeatureItem } from "./FeatureItem";
 export { FeatureSummaryCard } from "./FeatureSummaryCard";
+export { Section } from "./Section";
+export { SectionHeader } from "./SectionHeader";
 export { StatCard } from "./StatCard";

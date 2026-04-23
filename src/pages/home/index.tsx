@@ -5,7 +5,7 @@
  */
 
 import { Box } from "@chakra-ui/react";
-import { Cta, Faq, Features, Hero, Intro, Problems } from "./sections";
+import { Cta, Faq, Features, Hero, Intro, Problems, Reviews } from "./sections";
 
 export function HomePage() {
 	return (
@@ -14,6 +14,7 @@ export function HomePage() {
 			<Intro />
 			<Problems />
 			<Features />
+			<Reviews />
 			<Faq />
 			<Cta />
 		</Box>

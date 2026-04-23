@@ -15,28 +15,13 @@ import {
 	Text,
 	VStack,
 } from "@chakra-ui/react";
-import { Br } from "../../../components";
+import { Br, Section, SectionHeader } from "../../../components";
 
 export function Problems() {
 	return (
-		<Box as="section" bg="gray.100" color="gray.900" py={20}>
+		<Section bg="gray.100" color="gray.900">
 			<Container maxW="breakpoint-xl">
-				{/* ヘッダー */}
-				<Text
-					fontFamily="en.poppins"
-					fontSize="3xl"
-					mb={1}
-					color="gray.300"
-					fontWeight="bold"
-					textAlign="center"
-				>
-					Problems
-				</Text>
-				<Heading as="h2" mb={10} letterSpacing="wide" textAlign="center">
-					こんな経験があれば
-					<Br />
-					いちどLYNXを使ってみよう
-				</Heading>
+				<SectionHeader titleEn="Problems" titleJa="こんな経験ありませんか？" />
 
 				{/* 3つの課題カード */}
 				<Grid
@@ -51,7 +36,7 @@ export function Problems() {
 					{/* 学習アプリの場合 */}
 					<GridItem>
 						<Box shadow="lg" borderRadius="lg" overflow="hidden">
-							<Box bg="blue.600" px={4} py={3}>
+							<Box bg="blue.700" px={4} py={3}>
 								<Heading as="h3" variant="titleMd" color="white" textAlign="center">
 									学習アプリの場合
 								</Heading>
@@ -96,7 +81,7 @@ export function Problems() {
 					{/* 参考書の場合 */}
 					<GridItem>
 						<Box shadow="lg" borderRadius="lg" overflow="hidden">
-							<Box bg="blue.600" px={4} py={3}>
+							<Box bg="blue.700" px={4} py={3}>
 								<Heading as="h3" variant="titleMd" color="white" textAlign="center">
 									参考書の場合
 								</Heading>
@@ -149,7 +134,7 @@ export function Problems() {
 							borderRadius="lg"
 							overflow="hidden"
 						>
-							<Box bg="blue.600" px={4} py={3}>
+							<Box bg="blue.700" px={4} py={3}>
 								<Heading as="h3" variant="titleMd" color="white" textAlign="center">
 									塾の場合
 								</Heading>
@@ -195,6 +180,6 @@ export function Problems() {
 					</GridItem>
 				</Grid>
 			</Container>
-		</Box>
+		</Section>
 	);
 }

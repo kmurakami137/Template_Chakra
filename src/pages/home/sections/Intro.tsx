@@ -4,31 +4,31 @@
  * 「暗記の先を行く」セクション - 3つの特徴カード
  */
 
-import { Box, Container, Grid, GridItem, Heading, Icon, Text } from "@chakra-ui/react";
+import { Container, Grid, GridItem, Heading, Icon, Box, Text } from "@chakra-ui/react";
 import { LiaCrownSolid } from "react-icons/lia";
-import { Br } from "../../../components";
+import { Br, Section, SectionHeader } from "../../../components";
 
 export function Intro() {
 	return (
-		<Box as="section" bg="white" color="black" py={20}>
+		<Section bg="white" color="black">
 			<Container maxW="breakpoint-xl">
-				{/* ヘッダー */}
-				<Box mb={8} textAlign="center">
-					<Heading as="h2" mb={4}>
-						「暗記」の先を行く、「理解」する学習で、
-						<Br />
-						スキマ時間に成績アップしよう！
-					</Heading>
-					<Text
-						variant="bodyMd"
-						letterSpacing="wide"
-						textAlign={{ base: "justify", md: "center" }}
-					>
-						LYNXは暗記学習にとどまらず、「知識のつながり」や「文脈の把握」を通じて、
-						<Br />
-						深い理解を可能にする勉強アプリです。
-					</Text>
-				</Box>
+				<SectionHeader
+					titleJa={
+						<>
+							「暗記」の先を行く、「理解」する学習で、
+							<Br />
+							スキマ時間に成績アップしよう！
+						</>
+					}
+					description={
+						<>
+							LYNXは暗記学習にとどまらず、「知識のつながり」や「文脈の把握」を通じて、
+							<Br />
+							深い理解を可能にする勉強アプリです。
+						</>
+					}
+					mb={8}
+				/>
 
 				{/* 3つの特徴カード */}
 				<Container maxW="breakpoint-lg" color="white">
@@ -122,6 +122,6 @@ export function Intro() {
 					学習アプリの解説の平均文字数を比較。LYNXは、地理・歴史・公民分野を総合して、平均700字以上、合計300万字以上の解説を収録しています。
 				</Text>
 			</Container>
-		</Box>
+		</Section>
 	);
 }

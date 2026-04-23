@@ -19,7 +19,7 @@
  * />
  */
 
-import { Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import type { App } from "../data/apps";
 import { formatRounded } from "../data/apps";
 
@@ -70,7 +70,7 @@ const formatTotal = (total: number, key: AppDataKey): string => {
 const formatIndividual = (value: number, key: AppDataKey): string => {
 	const unit = getRoundUnit(key);
 	const unitLabels: Record<AppDataKey, string> = {
-		stages: "ステージ",
+		stages: "",
 		questions: "問",
 		terms: "語",
 		chars: "万字",
@@ -103,21 +103,26 @@ export function StatCard({ label, appDataKey, apps }: StatCardProps) {
 	const unit = getUnit(appDataKey);
 
 	return (
-		<Flex
-			direction="row"
-			bg="gray.200/60"
-			color="cyan.600"
-			rounded="lg"
-			overflow="hidden"
-			mt="4"
-		>
+		<Flex direction="row" bg="gray.100" color="blue.500" rounded="lg" overflow="hidden" mt="6">
 			{/* 左: ラベル+数値 */}
-			<Flex flex={1} direction="column" align="center" justify="center" py={2}>
-				<Text variant="titleMd">{label}</Text>
-				<Text variant="headlineMd" fontFamily="en.poppins">
+			<Flex
+				flex={1}
+				direction="column"
+				align="center"
+				justify="center"
+				py={2}
+				borderRightWidth="1px"
+				borderColor="gray.300"
+			>
+				<Box bg="blue.500" color="white" rounded="full" px={4} py={0.5} mb={1}>
+					<Text fontSize={13} fontWeight="bold">
+						{label}
+					</Text>
+				</Box>
+				<Text variant="displaySm" fontFamily="en.poppins">
 					{formatTotal(total, appDataKey)}
 					{unit && (
-						<Text as="span" variant="titleMd" mx={0.5}>
+						<Text as="span" variant="titleLg" mx={0.5}>
 							{unit}
 						</Text>
 					)}
@@ -130,10 +135,14 @@ export function StatCard({ label, appDataKey, apps }: StatCardProps) {
 					<Flex key={app.id} flex={1}>
 						<Flex
 							flex={1}
-							bg={index % 2 === 0 ? "gray.300/55" : "gray.200/40"}
+							// bg={index % 2 === 0 ? "gray.300/55" : "gray.200/40"}
+							borderBottomWidth={index % 2 === 1 ? "1px" : 0}
+							borderTopWidth={index % 2 === 1 ? "1px" : 0}
+							// borderRightWidth="1px"
 							py={1.5}
 							align="center"
 							justify="center"
+							borderColor="gray.300"
 						>
 							<Text variant="bodySm" fontWeight="bold">
 								{app.name}
@@ -141,10 +150,13 @@ export function StatCard({ label, appDataKey, apps }: StatCardProps) {
 						</Flex>
 						<Flex
 							flex={1}
-							bg={index % 2 === 0 ? "gray.300/30" : "gray.100/30"}
+							// bg={index % 2 === 0 ? "gray.300/30" : "gray.100/30"}
+							borderBottomWidth={index % 2 === 1 ? "1px" : 0}
+							borderTopWidth={index % 2 === 1 ? "1px" : 0}
 							px={3}
 							align="center"
 							justify="flex-end"
+							borderColor="gray.300"
 						>
 							<Text variant="bodySm" fontWeight="bold">
 								{formatIndividual(getValue(app, appDataKey), appDataKey)}

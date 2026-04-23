@@ -7,6 +7,7 @@
  */
 
 import {
+	Bleed,
 	Box,
 	Button,
 	DialogBackdrop,
@@ -153,8 +154,8 @@ export function ExplanationShowcase({ examples }: ExplanationShowcaseProps) {
 		<>
 			{/* mdサイズ以上: 2カラムレイアウト */}
 			{!isMobile ? (
-				<Flex bg="gray.100" px={5} py={12} justify="center" align="stretch">
-					<Flex h="fit-content" gap={10}>
+				<Bleed inline={8} bg="gray.200" px={5} py={12} rounded="lg" mt={12}>
+					<Flex h="fit-content" gap={10} justify="center" align="stretch">
 						{/* 左: 用語選択ボタンエリア */}
 						<Flex direction="column" maxW="md" gap={4} h="fit-content">
 							<Flex>
@@ -223,7 +224,7 @@ export function ExplanationShowcase({ examples }: ExplanationShowcaseProps) {
 							<ExplanationCard example={currentExample} />
 						</Box>
 					</Flex>
-				</Flex>
+				</Bleed>
 			) : (
 				/* mdサイズ以下: ボタン + Dialog */
 				<>

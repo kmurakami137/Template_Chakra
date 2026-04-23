@@ -61,30 +61,33 @@ export function FeatureItem({
 	const feature = features[index];
 	const { label } = feature;
 	return (
-		<Box as="article" position="relative" bg={bg} color={color} pt={pt ?? py} pb={pb ?? py}>
+		<Box as="article" position="relative" bg={bg} color={color}>
 			{/* Container でコンテンツを中央揃え */}
-			<Container maxW="breakpoint-xl" position="relative" zIndex={1}>
+			<Container
+				maxW="breakpoint-xl"
+				position="relative"
+				zIndex={1}
+				pt={pt ?? py}
+				pb={pb ?? py}
+				borderBottomWidth={isLast ? 0 : "1px"}
+				borderColor="gray.300"
+			>
 				{/* 背景要素（最背面） */}
 				{bgImage}
-				<Box
-					py={12}
-					borderBottomWidth={isLast ? 0 : "1px"}
-					borderColor={color === "white" ? "gray.200" : "whiteAlpha.200"}
-					position="relative"
-					zIndex={2}
-				>
+				<Box position="relative" zIndex={2}>
 					{/* 番号 */}
 					<Text
 						fontFamily="en.poppins"
 						fontSize="8xl"
-						color="gray.200"
+						color="blue.200"
 						fontWeight="semibold"
 						lineHeight={1}
+						mb={3}
 					>
 						{String(index + 1).padStart(2, "0")}
 					</Text>
 					{/* タイトル */}
-					<Heading as="h3" variant="displaySm" mb={6}>
+					<Heading as="h3" variant="displaySm" mb={8}>
 						{label}
 					</Heading>
 					{/* サブタイトル */}

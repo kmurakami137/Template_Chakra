@@ -23,7 +23,7 @@
  * </FeatureDetails>
  */
 
-import { Box, Flex, Grid, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading, Icon, Image, Separator, Stack, Text } from "@chakra-ui/react";
 import { createContext, type ReactNode, useContext } from "react";
 import { FaStar } from "react-icons/fa6";
 
@@ -40,7 +40,7 @@ const COLUMNS = [2, 3] as const;
 
 type FeatureDetailsContextValue = {
 	layout: (typeof LAYOUTS)[number];
-	iconColor: string;
+	iconColor?: string;
 };
 
 const FeatureDetailsContext = createContext<FeatureDetailsContextValue | null>(null);
@@ -55,7 +55,7 @@ type FeatureDetailsProps = {
 	/** column レイアウト時のカラム数（デフォルト: 3） */
 	columns?: (typeof COLUMNS)[number];
 	/** アイコンの色（子に伝播） */
-	iconColor: string;
+	iconColor?: string;
 	children: ReactNode;
 	pt?: number | string;
 	pb?: number | string;
@@ -95,7 +95,7 @@ function FeatureDetailsRoot({
 
 type FeatureDetailItemProps = {
 	/** 見出しテキスト */
-	title: string;
+	title: ReactNode;
 	/** 説明文（ReactNode で Mark 等を含められる） */
 	description: ReactNode;
 	/** 画像パス。"placeholder" でグレーボックス、省略時は画像エリアなし */
@@ -116,14 +116,6 @@ type FeatureDetailItemProps = {
 // Item Styles（column/row 共通のあしらい）
 // ============================================================================
 
-/** Item コンテナの共通スタイル */
-const ITEM_CONTAINER_STYLES = {
-	bg: "gray.100",
-	borderRadius: "lg",
-	p: 4,
-	shadow: "md",
-};
-
 function FeatureDetailItem({
 	title,
 	description,
@@ -137,12 +129,20 @@ function FeatureDetailItem({
 	// Context から取得、props で上書き可能
 	const context = useContext(FeatureDetailsContext);
 	const layout = layoutProp ?? context?.layout ?? "column";
-	const iconColor = iconColorProp ?? context?.iconColor ?? "gray.600";
+	const iconColor = iconColorProp ?? context?.iconColor ?? "blue.600";
+
+	//  共通: Item コンテナの共通スタイル
+	const ITEM_CONTAINER_STYLES = {
+		bg: "gray.50",
+		borderRadius: "md",
+		p: 4,
+		shadow: "md",
+	};
 
 	// 共通: アイコン + タイトル
 	const headerContent = (
-		<Flex gap={1} align="center" mb={2}>
-			<Icon color={iconColor}>
+		<Flex gap={2} mb={3}>
+			<Icon color={iconColor} mt="0.4rem">
 				<FaStar />
 			</Icon>
 			<Heading as="h4" variant="titleLg">
@@ -153,7 +153,7 @@ function FeatureDetailItem({
 
 	// 共通: 説明文
 	const descriptionContent = (
-		<Text variant="bodySm" textAlign="justify">
+		<Text variant="bodyMd" textAlign="justify" mt={4}>
 			{description}
 		</Text>
 	);
@@ -186,6 +186,7 @@ function FeatureDetailItem({
 		return (
 			<Flex direction="column" {...ITEM_CONTAINER_STYLES}>
 				{headerContent}
+				<Separator borderColor="gray.300" />
 				<Box mb={6} flexGrow={1}>
 					{descriptionContent}
 				</Box>
@@ -206,6 +207,7 @@ function FeatureDetailItem({
 			{/* 左: テキストコンテンツ */}
 			<Flex direction="column" flex={1}>
 				{headerContent}
+				<Separator />
 				{descriptionContent}
 				{footer}
 			</Flex>
