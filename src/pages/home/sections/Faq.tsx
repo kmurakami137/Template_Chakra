@@ -9,7 +9,7 @@ import { Section, SectionHeader } from "../../../components";
 
 export function Faq() {
 	return (
-		<Section py={28} bg="gray.100" color="gray.900">
+		<Section id="faq" py={28} bg="gray.100" color="gray.900">
 			<Container maxW="breakpoint-xl">
 				<SectionHeader titleEn="FAQ" titleJa="よくあるご質問" mb={16} />
 

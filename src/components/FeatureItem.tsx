@@ -18,7 +18,7 @@
  * </FeatureItem>
  */
 
-import { Box, Container, Heading, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, Text } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 import { features } from "../data/features";
 
@@ -32,11 +32,14 @@ type FeatureItemProps = {
 	/** 背景要素（position: absolute で配置される） */
 	bgImage?: ReactNode;
 	/** サブタイトル（Features.tsx から渡す） */
+	rightArea?: ReactNode;
 	subtitle?: ReactNode;
 	/** 説明テキスト（Features.tsx から渡す） */
 	description?: ReactNode;
 	/** 背景色 */
 	bg?: string;
+	/** カバー背景画像URL */
+	bgImageUrl?: string;
 	/** テキスト色 */
 	color?: string;
 	/** 垂直方向のpadding */
@@ -50,9 +53,11 @@ export function FeatureItem({
 	children,
 	isLast = false,
 	bgImage,
+	bgImageUrl,
+	rightArea,
 	subtitle,
 	description,
-	bg = "gray.100",
+	bg = "blue.50",
 	color = "gray.900",
 	pt,
 	pb,
@@ -61,47 +66,84 @@ export function FeatureItem({
 	const feature = features[index];
 	const { label } = feature;
 	return (
-		<Box as="article" position="relative" bg={bg} color={color}>
-			{/* Container でコンテンツを中央揃え */}
-			<Container
-				maxW="breakpoint-xl"
-				position="relative"
-				zIndex={1}
-				pt={pt ?? py}
-				pb={pb ?? py}
-				borderBottomWidth={isLast ? 0 : "1px"}
-				borderColor="gray.300"
+		<Box as="article" position="relative" color={color}>
+			<Box
+				bg={bg}
+				backgroundImage={bgImageUrl ? `url(${bgImageUrl})` : undefined}
+				backgroundSize={bgImageUrl ? "cover" : undefined}
+				backgroundPosition={bgImageUrl ? "center" : undefined}
+				// rounded="3xl"
+				// borderBottomWidth={isLast ? undefined : "1px"}
 			>
-				{/* 背景要素（最背面） */}
-				{bgImage}
-				<Box position="relative" zIndex={2}>
-					{/* 番号 */}
-					<Text
-						fontFamily="en.poppins"
-						fontSize="8xl"
-						color="blue.200"
-						fontWeight="semibold"
-						lineHeight={1}
-						mb={3}
-					>
-						{String(index + 1).padStart(2, "0")}
-					</Text>
-					{/* タイトル */}
-					<Heading as="h3" variant="displaySm" mb={8}>
-						{label}
-					</Heading>
-					{/* サブタイトル */}
-					{subtitle && (
-						<Heading as="h4" variant="headlineLg" mb={2}>
-							{subtitle}
-						</Heading>
-					)}
-					{/* 説明テキスト */}
-					{description && <Text variant="bodyMd">{description}</Text>}
-					{/* コンテンツ */}
-					{children}
-				</Box>
-			</Container>
+				{/* Container でコンテンツを中央揃え */}
+				<Container
+					maxW="breakpoint-xl"
+					position="relative"
+					zIndex={1}
+					pt={pt ?? py}
+					pb={pb ?? py}
+					borderBottomWidth={isLast ? 0 : "1px"}
+					borderColor="gray.300"
+				>
+					{/* 背景要素（最背面） */}
+					{bgImage}
+					<Box position="relative" zIndex={2}>
+						{/* 上段: 左エリア（テキスト群）+ 右エリア */}
+						<Flex
+							direction={{ base: "column", lg: "row" }}
+							align={{ base: "stretch", lg: "center" }}
+							gap={8}
+							textAlign={{ base: "center", lg: "start" }}
+						>
+							<Box flex="1">
+								<Flex
+									fontFamily="en.poppins"
+									color="blue.600/70"
+									mb={4}
+									direction="column"
+								>
+									<Text fontSize="16px" lineHeight={1} fontWeight="bold">
+										Feature
+									</Text>
+									{/* 番号 */}
+									<Text fontSize="110px" lineHeight={1} fontWeight="bold">
+										{String(index + 1).padStart(2, "0")}
+									</Text>
+								</Flex>
+								{/* タイトル */}
+								<Heading as="h3" variant="displaySm" mb={8}>
+									{label}
+								</Heading>
+								{/* サブタイトル */}
+								{subtitle && (
+									<Heading as="h4" variant="headlineMd" mb={2}>
+										{subtitle}
+									</Heading>
+								)}
+								{/* 説明テキスト */}
+								{description && (
+									<Text variant="bodyMd" textAlign={{ base: "center", lg: "justify" }}>
+										{description}
+									</Text>
+								)}
+							</Box>
+							{rightArea && (
+								<Box
+									flexShrink={0}
+									w={{ base: "full", lg: "auto" }}
+									minW={{ base: 0, lg: 380 }}
+									display="flex"
+									justifyContent={{ base: "center", lg: "flex-start" }}
+								>
+									{rightArea}
+								</Box>
+							)}
+						</Flex>
+						{/* 下段: コンテンツ（全幅） */}
+						{children}
+					</Box>
+				</Container>
+			</Box>
 		</Box>
 	);
 }

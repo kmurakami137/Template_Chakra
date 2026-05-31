@@ -1,5 +1,7 @@
 export { AppStats } from "./AppStats";
 export { Br } from "./Br";
+export { Footer } from "./Footer";
+export { Header } from "./Header";
 export { ExplanationShowcase } from "./ExplanationShowcase";
 export { FeatureDetails } from "./FeatureDetails";
 export { FeatureItem } from "./FeatureItem";

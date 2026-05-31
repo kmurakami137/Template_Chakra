@@ -11,7 +11,7 @@ import type { ReactNode } from "react";
  * 対応フォーマット：
  * - <style="S1">テキスト</style> → Mark（強調）
  * - <style="HR"> → Separator（水平線）
- * - **テキスト** → 太字
+ * - **テキスト** → Mark（強調）
  * - ## 見出し → Heading（h3相当）
  * - ### 見出し → Heading（h4相当）
  * - 改行 → <br />
@@ -107,27 +107,19 @@ function parseInlineElements(text: string, baseKey: number): ReactNode[] {
 			if (before) {
 				elements.push(parseBold(before, `${baseKey}-${key++}`));
 			}
-			elements.push(
-				<Mark key={`${baseKey}-mark-${key++}`} bg="yellow.200">
-					{markedText}
-				</Mark>,
-			);
+			elements.push(<Mark key={`${baseKey}-mark-${key++}`}>{markedText}</Mark>);
 			remaining = remaining.slice(markMatch[0].length);
 			continue;
 		}
 
-		// **テキスト** → 太字
+		// **テキスト** → Mark
 		const boldMatch = remaining.match(/^(.*?)\*\*([^*]+)\*\*/);
 		if (boldMatch) {
-			const [, before, boldText] = boldMatch;
+			const [, before, markedText] = boldMatch;
 			if (before) {
 				elements.push(before);
 			}
-			elements.push(
-				<Text key={`${baseKey}-bold-${key++}`} as="strong" fontWeight="bold">
-					{boldText}
-				</Text>,
-			);
+			elements.push(<Mark key={`${baseKey}-bold-${key++}`}>{markedText}</Mark>);
 			remaining = remaining.slice(boldMatch[0].length);
 			continue;
 		}
@@ -141,7 +133,7 @@ function parseInlineElements(text: string, baseKey: number): ReactNode[] {
 }
 
 /**
- * 太字変換のヘルパー（**テキスト** のみ）
+ * Mark変換のヘルパー（**テキスト** のみ）
  */
 function parseBold(text: string, baseKey: string | number): ReactNode {
 	const parts = text.split(/(\*\*[^*]+\*\*)/);
@@ -150,9 +142,7 @@ function parseBold(text: string, baseKey: string | number): ReactNode {
 		if (boldMatch) {
 			return (
 				/* biome-ignore lint/suspicious/noArrayIndexKey: 静的テキストの分割結果で順序が変わらないため問題なし */
-				<Text key={`${baseKey}-b-${i}`} as="strong" fontWeight="bold">
-					{boldMatch[1]}
-				</Text>
+				<Mark key={`${baseKey}-b-${i}`}>{boldMatch[1]}</Mark>
 			);
 		}
 		return part;

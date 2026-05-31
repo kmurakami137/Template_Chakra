@@ -25,7 +25,7 @@ export function FeatureSummaryCard({ index, children }: FeatureSummaryCardProps)
 			bg="white"
 			px={6}
 			borderRadius="lg"
-			shadow="lg"
+			shadow="insetSm"
 			flexBasis={{
 				base: "100%",
 				sm: "calc(50% - 6px)",
@@ -41,7 +41,7 @@ export function FeatureSummaryCard({ index, children }: FeatureSummaryCardProps)
 				<Text
 					fontFamily="en.poppins"
 					variant="displayMd"
-					color="gray.300"
+					color="blue.500"
 					lineHeight="0"
 					mr="4"
 					flexShrink={0}

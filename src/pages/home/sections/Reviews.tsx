@@ -5,14 +5,14 @@
  */
 
 import { Container } from "@chakra-ui/react";
-import { ReviewCarousel } from "../../../components/ReviewCarousel";
 import { Section, SectionHeader } from "../../../components";
+import { ReviewCarousel } from "../../../components/ReviewCarousel";
 
 export function Reviews() {
 	return (
-		<Section>
+		<Section id="voices">
 			<Container mb={10}>
-				<SectionHeader titleEn="Reviews" titleJa="お客様の声" mb={0} />
+				<SectionHeader titleEn="Voices" titleJa="お客様の声" mb={0} titleColor="blue.500" />
 			</Container>
 			<ReviewCarousel />
 		</Section>

@@ -5,22 +5,19 @@
  */
 
 import { Box, Container, HStack } from "@chakra-ui/react";
-import { AppStats, Section, SectionHeader } from "../../../components";
 import AppStoreBadge from "../../../assets/badges/Download_on_the_App_Store_Badge_JP_RGB_wht_100317.svg?react";
 import GooglePlayBadge from "../../../assets/badges/GetItOnGooglePlay_Badge_Web_color_Japanese.svg?react";
-
-const STORE_LINKS = {
-	appStore: "#",
-	googlePlay: "#",
-} as const;
+import { AppStats, Section, SectionHeader } from "../../../components";
+import { APP_STORE } from "../../../data/site";
 
 export function Cta() {
 	return (
-		<Section py={28} bg="gray.900" color="white">
+		<Section py={28} bg="blue.700" color="white" bgImage="gradients.blue">
 			<Container maxW="breakpoint-lg" textAlign="center">
 				<SectionHeader
-					titleJa="今すぐ、理解する学習を始めよう。"
-					description="無料でダウンロード。中学社会の学習が変わります。"
+					titleJa="さあ、はじめよう"
+					// description="無料でダウンロード。中学社会の学習が変わります。"
+					descriptionColor="white/70"
 				/>
 				<AppStats />
 				<HStack justify="center" gap={4} flexWrap="wrap" mt={10}>
@@ -30,7 +27,12 @@ export function Cta() {
 						transition="opacity 0.2s"
 						_hover={{ opacity: 0.8 }}
 					>
-						<a href={STORE_LINKS.appStore} aria-label="App Store からダウンロード">
+						<a
+							href={APP_STORE.ios.developer}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="App Store からダウンロード"
+						>
 							<AppStoreBadge style={{ height: "50px", width: "auto" }} />
 						</a>
 					</Box>
@@ -40,7 +42,12 @@ export function Cta() {
 						transition="opacity 0.2s"
 						_hover={{ opacity: 0.8 }}
 					>
-						<a href={STORE_LINKS.googlePlay} aria-label="Google Play で手に入れよう">
+						<a
+							href={APP_STORE.android.developer}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Google Play で手に入れよう"
+						>
 							<GooglePlayBadge height="50" />
 						</a>
 					</Box>

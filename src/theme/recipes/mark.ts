@@ -1,5 +1,7 @@
 import { defineRecipe } from "@chakra-ui/react";
 
+const HIGHLIGHT_COLOR = "rgb(255, 238, 0, 0.5)";
+
 /**
  * Mark レシピ
  *
@@ -12,15 +14,27 @@ export const markRecipe = defineRecipe({
 	className: "mark",
 	base: {
 		display: "inline",
-		bg: "#efe596",
 		color: "inherit",
 		fontWeight: "inherit",
-		px: 1,
-		pb: 0.25,
-		rounded: "xs",
-		// Chakra UIデフォルトの nowrap を上書きして改行を許可
 		whiteSpace: "normal",
-		// 複数行にわたる場合、各行で装飾を適用
 		boxDecorationBreak: "clone",
+	},
+	variants: {
+		variant: {
+			/** 下線マーカー（デフォルト）: テキスト下部のみハイライト */
+			underline: {
+				background: `linear-gradient(transparent 55%, ${HIGHLIGHT_COLOR} 40%)`,
+			},
+			/** 全面マーカー: テキスト全体をハイライト */
+			solid: {
+				bg: HIGHLIGHT_COLOR,
+				px: 1,
+				pb: 0.25,
+				rounded: "xs",
+			},
+		},
+	},
+	defaultVariants: {
+		variant: "underline",
 	},
 });

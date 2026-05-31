@@ -5,9 +5,9 @@ type SectionProps = BoxProps & {
 	children: ReactNode;
 };
 
-export function Section({ children, py = 20, ...rest }: SectionProps) {
+export function Section({ children, pt = 20, pb = 24, ...rest }: SectionProps) {
 	return (
-		<Box as="section" py={py} {...rest}>
+		<Box as="section" {...rest} pt={pt} pb={pb}>
 			{children}
 		</Box>
 	);

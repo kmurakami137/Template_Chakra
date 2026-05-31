@@ -11,7 +11,7 @@ import { defineTokens } from "@chakra-ui/react";
  */
 export const gradients = defineTokens.gradients({
 	blue: {
-		value: "linear-gradient(to bottom right, var(--chakra-colors-cyan-500), var(--chakra-colors-blue-600), var(--chakra-colors-blue-500))",
+		value: "linear-gradient(to bottom right, var(--chakra-colors-cyan-400), var(--chakra-colors-blue-500), var(--chakra-colors-blue-400))",
 	},
 	green: {
 		value: "linear-gradient(to bottom right, var(--chakra-colors-teal-400), var(--chakra-colors-teal-700), var(--chakra-colors-teal-600))",

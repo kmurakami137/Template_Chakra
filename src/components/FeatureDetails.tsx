@@ -23,7 +23,7 @@
  * </FeatureDetails>
  */
 
-import { Box, Flex, Grid, Heading, Icon, Image, Separator, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Grid, Heading, Icon, Image, Stack, Text } from "@chakra-ui/react";
 import { createContext, type ReactNode, useContext } from "react";
 import { FaStar } from "react-icons/fa6";
 
@@ -62,6 +62,7 @@ type FeatureDetailsProps = {
 	py?: number | string;
 };
 
+// ルートコンテナ
 function FeatureDetailsRoot({
 	layout = "column",
 	columns = 3,
@@ -76,7 +77,7 @@ function FeatureDetailsRoot({
 			{layout === "column" ? (
 				<Grid
 					templateColumns={{ base: "1fr", md: `repeat(${columns}, 1fr)` }}
-					gap={8}
+					gap={5}
 					pt={pt ?? py}
 					pb={pb ?? py}
 				>
@@ -129,23 +130,23 @@ function FeatureDetailItem({
 	// Context から取得、props で上書き可能
 	const context = useContext(FeatureDetailsContext);
 	const layout = layoutProp ?? context?.layout ?? "column";
-	const iconColor = iconColorProp ?? context?.iconColor ?? "blue.600";
+	const iconColor = iconColorProp ?? context?.iconColor ?? "blue.400";
 
 	//  共通: Item コンテナの共通スタイル
 	const ITEM_CONTAINER_STYLES = {
-		bg: "gray.50",
+		bg: "white/40",
 		borderRadius: "md",
-		p: 4,
-		shadow: "md",
+		// p: 4,
+		shadow: "neuMd",
 	};
 
 	// 共通: アイコン + タイトル
 	const headerContent = (
-		<Flex gap={2} mb={3}>
-			<Icon color={iconColor} mt="0.4rem">
+		<Flex gap={2} bg="blue.700/7" px={4} py={4} roundedTop="md">
+			<Icon color={iconColor} mt="0.45rem" animation="spin 4s linear infinite">
 				<FaStar />
 			</Icon>
-			<Heading as="h4" variant="titleLg">
+			<Heading as="h4" variant="titleLg" color="blue.800">
 				{title}
 			</Heading>
 		</Flex>
@@ -153,7 +154,7 @@ function FeatureDetailItem({
 
 	// 共通: 説明文
 	const descriptionContent = (
-		<Text variant="bodyMd" textAlign="justify" mt={4}>
+		<Text variant="bodyMd" textAlign="justify">
 			{description}
 		</Text>
 	);
@@ -185,13 +186,13 @@ function FeatureDetailItem({
 	if (layout === "column") {
 		return (
 			<Flex direction="column" {...ITEM_CONTAINER_STYLES}>
-				{headerContent}
-				<Separator borderColor="gray.300" />
-				<Box mb={6} flexGrow={1}>
-					{descriptionContent}
-				</Box>
-				{imageContent}
-				{footer}
+				<Box>{headerContent}</Box>
+				{/* <Separator borderColor="gray.300" /> */}
+				<Flex flex={1} p={4} justify="flex-end" direction="column">
+					<Box flex={1}>{descriptionContent}</Box>
+					{imageContent && <Box mt={4}>{imageContent}</Box>}
+					{footer && <Box mt={4}>{footer}</Box>}
+				</Flex>
 			</Flex>
 		);
 	}
@@ -207,7 +208,7 @@ function FeatureDetailItem({
 			{/* 左: テキストコンテンツ */}
 			<Flex direction="column" flex={1}>
 				{headerContent}
-				<Separator />
+				{/* <Separator /> */}
 				{descriptionContent}
 				{footer}
 			</Flex>

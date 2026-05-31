@@ -1,4 +1,4 @@
-import { Box, Heading, Text, type BoxProps } from "@chakra-ui/react";
+import { Box, type BoxProps, Heading, Text } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 
 type SectionHeaderProps = {
@@ -14,6 +14,10 @@ type SectionHeaderProps = {
 	mb?: BoxProps["mb"];
 	/** 英字ラベルの色（デフォルト: gray.300） */
 	labelColor?: BoxProps["color"];
+	/** タイトルの色（デフォルト: 継承） */
+	titleColor?: BoxProps["color"];
+	/** 説明文言の色（デフォルト: 継承） */
+	descriptionColor?: BoxProps["color"];
 };
 
 export function SectionHeader({
@@ -23,26 +27,39 @@ export function SectionHeader({
 	align = "center",
 	mb = 10,
 	labelColor = "gray.300",
+	titleColor,
+	descriptionColor = "gray.800",
 }: SectionHeaderProps) {
 	return (
 		<Box mb={mb} textAlign={align}>
 			{titleEn && (
 				<Text
 					fontFamily="en.poppins"
-					fontSize="2xl"
+					fontSize="xl"
 					fontWeight="bold"
 					color={labelColor}
-					mb={1}
+					mb={2}
 					lineHeight="1"
 				>
 					{titleEn}
 				</Text>
 			)}
-			<Heading as="h2" letterSpacing="wide" variant="displaySm">
+			<Heading
+				as="h2"
+				letterSpacing="wide"
+				fontWeight="bold"
+				variant="displaySm"
+				color={titleColor}
+			>
 				{titleJa}
 			</Heading>
 			{description && (
-				<Text variant="bodyMd" mt={4} textAlign={align}>
+				<Text
+					variant="bodyMd"
+					mt={4}
+					textAlign={{ base: "left", md: align }}
+					color={descriptionColor}
+				>
 					{description}
 				</Text>
 			)}

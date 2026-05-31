@@ -4,21 +4,33 @@
  * 「暗記の先を行く」セクション - 3つの特徴カード
  */
 
-import { Container, Grid, GridItem, Heading, Icon, Box, Text } from "@chakra-ui/react";
+import { Box, Container, Flex, Grid, GridItem, Heading, Icon, Text } from "@chakra-ui/react";
 import { LiaCrownSolid } from "react-icons/lia";
+
 import { Br, Section, SectionHeader } from "../../../components";
+import LynxLogo from "../../../assets/Lynx-Logo.svg?react";
 
 export function Intro() {
 	return (
-		<Section bg="white" color="black">
+		<Section id="about" bg="gray.100" color="black">
 			<Container maxW="breakpoint-xl">
 				<SectionHeader
+					titleEn="About LYNX"
 					titleJa={
-						<>
-							「暗記」の先を行く、「理解」する学習で、
-							<Br />
-							スキマ時間に成績アップしよう！
-						</>
+						<Flex align="end" justify={"center"}>
+							<Icon
+								h={9}
+								w="auto"
+								color="inherit"
+								asChild
+								pr="2"
+								pb={2}
+								aria-label="LYNX"
+							>
+								<LynxLogo />
+							</Icon>
+							で「暗記」の先へ
+						</Flex>
 					}
 					description={
 						<>
@@ -28,6 +40,7 @@ export function Intro() {
 						</>
 					}
 					mb={8}
+					titleColor="blue.600"
 				/>
 
 				{/* 3つの特徴カード */}
@@ -43,16 +56,16 @@ export function Intro() {
 								p={4}
 								borderRadius="xl"
 								bgImage="gradients.blue"
-								shadow="lg"
 								textAlign="center"
 								py={8}
 								h="full"
+								shadow="neuMdWithInner"
 							>
 								<Icon fontSize="4xl" mb={2}>
 									<LiaCrownSolid />
 								</Icon>
 								<Text variant="titleMd" letterSpacing="wide" mb={1}>
-									社会科アプリNo.1の
+									社会科アプリNo.1<Text as="sup">※</Text>の
 								</Text>
 								<Heading as="h3">詳しい解説</Heading>
 							</Box>
@@ -63,11 +76,11 @@ export function Intro() {
 							<Box
 								p={4}
 								borderRadius="xl"
-								bgImage="gradients.green"
-								shadow="lg"
+								bgImage="gradients.blue"
 								textAlign="center"
 								py={8}
 								h="full"
+								shadow="neuMdWithInner"
 							>
 								<Icon fontSize="4xl" mb={2}>
 									<LiaCrownSolid />
@@ -84,11 +97,11 @@ export function Intro() {
 							<Box
 								p={4}
 								borderRadius="xl"
-								bgImage="gradients.purple"
-								shadow="lg"
+								bgImage="gradients.blue"
 								textAlign="center"
 								py={8}
 								h="full"
+								shadow="neuMdWithInner"
 							>
 								<Icon fontSize="4xl" mb={2}>
 									<LiaCrownSolid />
@@ -106,20 +119,23 @@ export function Intro() {
 						borderRadius="full"
 						py={3}
 						px={2}
-						borderWidth={1}
-						borderColor="black"
+						// borderWidth={1}
+						// borderColor="blue.600"
 						textAlign="center"
+						bg="blue.100"
+						shadow="neuMdWithInner"
 					>
-						<Text variant="headlineMd" fontWeight="black" color="black">
+						<Text variant="headlineSm" fontWeight="black" color="blue.600">
 							新学習指導要領対応 / 学校教科書対応 / 高校受験対応
 						</Text>
 					</Box>
 				</Container>
 
 				{/* 注釈 */}
-				<Text variant="labelMd" my={8} textAlign="center">
-					※
-					学習アプリの解説の平均文字数を比較。LYNXは、地理・歴史・公民分野を総合して、平均700字以上、合計300万字以上の解説を収録しています。
+				<Text variant="labelMd" mt={10} textAlign="center" color="black/60">
+					※ 学習アプリの解説の平均文字数を比較。（Antares Works調べ）
+					<Br />
+					LYNXは、地理・歴史・公民分野を総合して、平均700字以上、合計300万字以上の解説を収録しています。
 				</Text>
 			</Container>
 		</Section>
