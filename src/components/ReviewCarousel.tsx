@@ -62,7 +62,7 @@ function ReviewCard({ rating, subject, title, content, author, date, store }: Re
 			<Dialog.Trigger asChild>
 				<Box
 					as="blockquote"
-					bg="black/4"
+					bg="white/70"
 					borderRadius="lg"
 					p={6}
 					h="100%"

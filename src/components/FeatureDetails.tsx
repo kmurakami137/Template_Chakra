@@ -76,6 +76,7 @@ function FeatureDetailsRoot({
 		<FeatureDetailsContext.Provider value={{ layout, iconColor }}>
 			{layout === "column" ? (
 				<Grid
+					data-gsap="details"
 					templateColumns={{ base: "1fr", md: `repeat(${columns}, 1fr)` }}
 					gap={5}
 					pt={pt ?? py}
@@ -84,7 +85,7 @@ function FeatureDetailsRoot({
 					{children}
 				</Grid>
 			) : (
-				<Stack gap={8}>{children}</Stack>
+				<Stack data-gsap="details" gap={8}>{children}</Stack>
 			)}
 		</FeatureDetailsContext.Provider>
 	);

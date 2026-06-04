@@ -10,7 +10,7 @@ import { ReviewCarousel } from "../../../components/ReviewCarousel";
 
 export function Reviews() {
 	return (
-		<Section id="voices">
+		<Section id="voices" bg="blue.800/10">
 			<Container mb={10}>
 				<SectionHeader titleEn="Voices" titleJa="お客様の声" mb={0} titleColor="blue.500" />
 			</Container>

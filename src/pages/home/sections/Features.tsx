@@ -433,14 +433,24 @@ export function Features() {
 				index={3}
 				// subtitle="大きな範囲も、小さな範囲も、自由自在"
 				description={
-					<Box>
+					<Box
+						display="flex"
+						flexDirection="column"
+						alignItems={{ base: "center", lg: "start" }}
+					>
 						<Box>
 							地理／歴史／公民<Mark>合計550ステージ以上</Mark>
 							から、細かく範囲を選んで学習できます。 <Br />
 							範囲選択が柔軟だから、
 							<Mark>自分のペースに合わせて効率的な学習</Mark>ができます。
 						</Box>
-						<Box w={400} mt={4} shadow="lg">
+						<Box
+							w={{ base: "full", md: "400px" }}
+							mt={8}
+							shadow="neuMd"
+							border={1}
+							borderColor="blue.600"
+						>
 							<StatCard label="ステージ数" appDataKey="stages" apps={apps} />
 						</Box>
 					</Box>

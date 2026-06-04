@@ -15,12 +15,11 @@ export function Cta() {
 		<Section py={28} bg="blue.700" color="white" bgImage="gradients.blue">
 			<Container maxW="breakpoint-lg" textAlign="center">
 				<SectionHeader
-					titleJa="さあ、はじめよう"
-					// description="無料でダウンロード。中学社会の学習が変わります。"
-					descriptionColor="white/70"
+					titleJa="さあ、はじめよう！"
+					description="無料でダウンロードして中学社会をマスターしよう。"
+					descriptionColor="white/80"
 				/>
-				<AppStats />
-				<HStack justify="center" gap={4} flexWrap="wrap" mt={10}>
+				<HStack justify="center" gap={4} flexWrap="wrap" mt={10} mb={10}>
 					<Box
 						asChild
 						display="inline-flex"
@@ -52,6 +51,7 @@ export function Cta() {
 						</a>
 					</Box>
 				</HStack>
+				<AppStats />
 			</Container>
 		</Section>
 	);

@@ -65,85 +65,107 @@ export function FeatureItem({
 }: FeatureItemProps) {
 	const feature = features[index];
 	const { label } = feature;
+
 	return (
-		<Box as="article" position="relative" color={color}>
+		<Box
+			as="article"
+			data-gsap-item
+			position="relative"
+			color={color}
+			overflow="hidden"
+			borderBottomWidth="1px"
+			borderColor="gray.300"
+		>
 			<Box
-				bg={bg}
+				data-gsap="bg"
+				// bg={bg}
 				backgroundImage={bgImageUrl ? `url(${bgImageUrl})` : undefined}
 				backgroundSize={bgImageUrl ? "cover" : undefined}
 				backgroundPosition={bgImageUrl ? "center" : undefined}
-				// rounded="3xl"
-				// borderBottomWidth={isLast ? undefined : "1px"}
+				position="absolute"
+				inset={0}
+				overflow="hidden"
+				zIndex={0}
+			/>
+			{/* Container でコンテンツを中央揃え */}
+			<Container
+				maxW="breakpoint-xl"
+				position="relative"
+				zIndex={1}
+				pt={pt ?? py}
+				pb={pb ?? py}
 			>
-				{/* Container でコンテンツを中央揃え */}
-				<Container
-					maxW="breakpoint-xl"
-					position="relative"
-					zIndex={1}
-					pt={pt ?? py}
-					pb={pb ?? py}
-					borderBottomWidth={isLast ? 0 : "1px"}
-					borderColor="gray.300"
-				>
-					{/* 背景要素（最背面） */}
-					{bgImage}
-					<Box position="relative" zIndex={2}>
-						{/* 上段: 左エリア（テキスト群）+ 右エリア */}
-						<Flex
-							direction={{ base: "column", lg: "row" }}
-							align={{ base: "stretch", lg: "center" }}
-							gap={8}
-							textAlign={{ base: "center", lg: "start" }}
-						>
-							<Box flex="1">
-								<Flex
-									fontFamily="en.poppins"
-									color="blue.600/70"
-									mb={4}
-									direction="column"
+				{/* 背景要素（最背面） */}
+				{bgImage}
+				<Box position="relative" zIndex={2}>
+					{/* 上段: 左エリア（テキスト群）+ 右エリア */}
+					<Flex
+						direction={{ base: "column", lg: "row" }}
+						align={{ base: "stretch", lg: "center" }}
+						gap={8}
+						textAlign={{ base: "center", lg: "start" }}
+					>
+						<Box flex="1">
+							<Flex
+								data-gsap="number"
+								fontFamily="en.poppins"
+								color="blue.600"
+								mb={4}
+								direction="column"
+								position="relative"
+							>
+								<Text
+									fontSize="32px"
+									lineHeight={1}
+									fontWeight="bold"
+									pl={1}
+									mb={-1}
 								>
-									<Text fontSize="16px" lineHeight={1} fontWeight="bold">
-										Feature
-									</Text>
-									{/* 番号 */}
-									<Text fontSize="110px" lineHeight={1} fontWeight="bold">
-										{String(index + 1).padStart(2, "0")}
-									</Text>
-								</Flex>
-								{/* タイトル */}
-								<Heading as="h3" variant="displaySm" mb={8}>
-									{label}
+									Feature
+								</Text>
+								{/* 番号 */}
+								<Text fontSize="110px" lineHeight={1} fontWeight="bold">
+									{String(index + 1).padStart(2, "0")}
+								</Text>
+							</Flex>
+							{/* タイトル */}
+							<Heading data-gsap="heading" as="h3" variant="displaySm" mb={8}>
+								{label}
+							</Heading>
+							{/* サブタイトル */}
+							{subtitle && (
+								<Heading as="h4" variant="headlineMd" mb={2}>
+									{subtitle}
 								</Heading>
-								{/* サブタイトル */}
-								{subtitle && (
-									<Heading as="h4" variant="headlineMd" mb={2}>
-										{subtitle}
-									</Heading>
-								)}
-								{/* 説明テキスト */}
-								{description && (
-									<Text variant="bodyMd" textAlign={{ base: "center", lg: "justify" }}>
-										{description}
-									</Text>
-								)}
-							</Box>
-							{rightArea && (
-								<Box
-									flexShrink={0}
-									w={{ base: "full", lg: "auto" }}
-									minW={{ base: 0, lg: 380 }}
-									display="flex"
-									justifyContent={{ base: "center", lg: "flex-start" }}
-								>
-									{rightArea}
-								</Box>
 							)}
-						</Flex>
-						{/* 下段: コンテンツ（全幅） */}
-						{children}
-					</Box>
-				</Container>
-			</Box>
+							{/* 説明テキスト */}
+							{description && (
+								<Text
+									data-gsap="description"
+									variant="bodyMd"
+									textAlign={{ base: "center", lg: "justify" }}
+								>
+									{description}
+								</Text>
+							)}
+						</Box>
+						{rightArea && (
+							<Box
+								data-gsap="right"
+								flexShrink={0}
+								w={{ base: "full", lg: "auto" }}
+								minW={{ base: 0, lg: 380 }}
+								display="flex"
+								justifyContent={{ base: "center", lg: "flex-start" }}
+							>
+								{rightArea}
+							</Box>
+						)}
+					</Flex>
+					{/* 下段: コンテンツ（全幅） */}
+					{children}
+				</Box>
+			</Container>
 		</Box>
 	);
 }

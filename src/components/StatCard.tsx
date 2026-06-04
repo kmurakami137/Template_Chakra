@@ -103,7 +103,7 @@ export function StatCard({ label, appDataKey, apps }: StatCardProps) {
 	const unit = getUnit(appDataKey);
 
 	return (
-		<Flex direction="row" bg="white" color="blue.500" rounded="lg" overflow="hidden">
+		<Flex direction="row" bg="gray.100" color="blue.500" rounded="lg" overflow="hidden">
 			{/* 左: ラベル+数値 */}
 			<Flex
 				flex={1}

@@ -81,7 +81,7 @@ export function Hero({ isReady }: HeroProps) {
 			<Box
 				data-gsap="bg-image"
 				position="absolute"
-				inset={0}
+				inset={-6}
 				opacity={0}
 				mixBlendMode="normal"
 				pointerEvents="none"
@@ -89,7 +89,7 @@ export function Hero({ isReady }: HeroProps) {
 				<Image
 					src={neko}
 					w="100%"
-					h={{ base: "100%", lg: "100%" }}
+					h="100%"
 					objectFit="cover"
 					objectPosition={{ base: "22% center", lg: "47% center" }}
 				/>
