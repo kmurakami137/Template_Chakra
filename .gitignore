@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# 未使用アセット候補（ソースコードから参照されていない画像）
+_assets_draft/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
