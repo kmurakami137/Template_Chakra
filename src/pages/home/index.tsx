@@ -30,8 +30,8 @@ export function HomePage() {
 	return (
 		<>
 			<Helmet>
-				<html lang={SITE.lang} />
 				<title>{SITE.name}</title>
+				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 				<meta name="description" content={SITE.description} />
 				<meta name="keywords" content={SITE.keywords.join(", ")} />
 				<meta property="og:type" content="website" />

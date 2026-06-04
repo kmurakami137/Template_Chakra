@@ -103,6 +103,44 @@ export const MyButton = ({ variant, ...props }) => {
 
 ---
 
+## `<head>` 管理方針
+
+**基準: JSが実行される前に必要かどうか**
+
+| 項目 | 場所 | 理由 |
+|---|---|---|
+| `charset` | `index.html` のみ | HTML解析の開始時点で必要 |
+| `viewport` | `index.html` のみ | JS前にモバイルレイアウトが崩れる |
+| `lang` 属性 | `index.html` のみ | クローラー・スクリーンリーダーがJS前に参照 |
+| Google Fonts | `index.html` のみ | JS前にフォント読み込みを開始しないと `document.fonts.ready` の完了が遅れる |
+| `<title>` | `<Helmet>` のみ | ページ固有・JS後でも問題なし |
+| favicon | `<Helmet>` のみ | JS後でも実用上問題なし |
+| description / OGP / Twitter Card | `<Helmet>` のみ | ページ固有のSEOメタ情報 |
+
+**ルール: 同じ項目を両方に書かない（Single Source of Truth）**
+
+```html
+<!-- ✅ index.html: JS前に必要なものだけ -->
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts のみ許可 -->
+  </head>
+```
+
+```tsx
+// ✅ <Helmet>: title・favicon・SEOメタ情報
+<Helmet>
+  <title>{SITE.name}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="description" content={SITE.description} />
+  {/* OGP, Twitter Card ... */}
+</Helmet>
+```
+
+---
+
 ## Storybook ガイドライン
 
 ### 基本方針
