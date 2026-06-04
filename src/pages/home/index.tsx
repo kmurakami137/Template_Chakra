@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet-async";
 import { useCallback, useEffect, useState } from "react";
 import { Footer, Header, LoadingScreen } from "../../components";
 import { SEO, SITE, getAbsoluteUrl } from "../../data/site";
-import { Cta, Faq, Features, Hero, Intro, Problems, Reviews } from "./sections";
+import { Cta, Features, Hero, Intro, Problems, Reviews } from "./sections";
 
 export function HomePage() {
 	const [fontsReady, setFontsReady] = useState(false);

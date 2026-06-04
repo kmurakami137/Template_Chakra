@@ -3,7 +3,6 @@ import { useLayoutEffect, useRef } from "react";
 import { gsap } from "../../../lib/gsap";
 import { useParallax } from "../../../hooks/useParallax";
 import { useStaggerReveal } from "../../../hooks/useStaggerReveal";
-import ab07 from "../../../assets/iklas-O50tLBMtCFw-unsplash.jpg";
 
 import ab01 from "../../../assets/iklas-7PdkAgRP69Y-unsplash_custom2.jpg";
 // import ab09 from "../../../assets/iklas-qlW7RwHZVG8-unsplash.jpg";
