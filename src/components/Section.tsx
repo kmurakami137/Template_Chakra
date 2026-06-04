@@ -1,14 +1,17 @@
 import { Box, type BoxProps } from "@chakra-ui/react";
-import type { ReactNode } from "react";
+import { forwardRef, type ReactNode } from "react";
 
 type SectionProps = BoxProps & {
 	children: ReactNode;
 };
 
-export function Section({ children, pt = 20, pb = 24, ...rest }: SectionProps) {
+export const Section = forwardRef<HTMLElement, SectionProps>(function Section(
+	{ children, pt = 20, pb = 24, ...rest },
+	ref,
+) {
 	return (
-		<Box as="section" {...rest} pt={pt} pb={pb}>
+		<Box as="section" ref={ref} {...rest} pt={pt} pb={pb}>
 			{children}
 		</Box>
 	);
-}
+});

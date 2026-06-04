@@ -9,8 +9,11 @@ import { LiaCrownSolid } from "react-icons/lia";
 
 import { Br, Section, SectionHeader } from "../../../components";
 import LynxLogo from "../../../assets/Lynx-Logo.svg?react";
+import { useStaggerReveal } from "../../../hooks/useStaggerReveal";
 
 export function Intro() {
+	const cardsRef = useStaggerReveal<HTMLDivElement>({ stagger: 0.1, distance: 30, duration: 0.6 });
+
 	return (
 		<Section id="about" bg="gray.100" color="black">
 			<Container maxW="breakpoint-xl">
@@ -46,6 +49,7 @@ export function Intro() {
 				{/* 3つの特徴カード */}
 				<Container maxW="breakpoint-lg" color="white">
 					<Grid
+						ref={cardsRef}
 						templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
 						gap={4}
 						alignItems="stretch"

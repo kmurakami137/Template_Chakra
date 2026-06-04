@@ -1,5 +1,11 @@
 import { Box, Container, Flex, Icon, Image, Mark, Text } from "@chakra-ui/react";
+import { useLayoutEffect, useRef } from "react";
+import { gsap } from "../../../lib/gsap";
+import { useParallax } from "../../../hooks/useParallax";
+import { useStaggerReveal } from "../../../hooks/useStaggerReveal";
 import ab07 from "../../../assets/iklas-O50tLBMtCFw-unsplash.jpg";
+
+import ab01 from "../../../assets/iklas-7PdkAgRP69Y-unsplash_custom2.jpg";
 // import ab09 from "../../../assets/iklas-qlW7RwHZVG8-unsplash.jpg";
 import img01 from "../../../assets/img01.png";
 import img02 from "../../../assets/img02.png";
@@ -26,25 +32,131 @@ import { explanationExamples } from "../../../data/explanation";
 // import { features } from "../../../data/features";
 
 export function Features() {
+	const sectionRef = useRef<HTMLDivElement>(null);
+	const overviewBgRef = useParallax<HTMLDivElement>({ speed: 0.6, scrub: 1.2 });
+	const cardsRef = useStaggerReveal<HTMLDivElement>({
+		stagger: 0.07,
+		distance: 24,
+		duration: 0.55,
+	});
+
+	useLayoutEffect(() => {
+		const ctx = gsap.context((self) => {
+			const items = self.selector?.("[data-gsap-item]") ?? [];
+			for (const item of items) {
+				const q = (attr: string) => item.querySelector(`[data-gsap="${attr}"]`);
+
+				const tl = gsap.timeline({
+					scrollTrigger: {
+						trigger: q("number"),
+						start: "top 70%",
+						toggleActions: "play none none reverse",
+					},
+				});
+
+				tl.fromTo(q("number"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5 });
+				if (q("heading")) {
+					tl.fromTo(
+						q("heading"),
+						{ opacity: 0, y: 40 },
+						{ opacity: 1, y: 0, duration: 0.7 },
+						"<0.1",
+					);
+				}
+				if (q("right")) {
+					tl.fromTo(
+						q("right"),
+						{ opacity: 0, x: 40 },
+						{ opacity: 1, x: 0, duration: 0.7 },
+						"<0.15",
+					);
+				}
+				if (q("description")) {
+					tl.fromTo(
+						q("description"),
+						{ opacity: 0, y: 20 },
+						{ opacity: 1, y: 0, duration: 0.7, delay: 0.25 },
+						"<0.1",
+					);
+				}
+				if (q("details")) {
+					tl.fromTo(
+						q("details"),
+						{ opacity: 0, y: 30 },
+						{ opacity: 1, y: 0, duration: 0.6, delay: 0.5 },
+						"<0.2",
+					);
+				}
+
+				// 背景レイヤー: 矩形 → 大三角形 → 小三角形 を1つの動きとして
+				if (q("bg")) {
+					tl.set(
+						q("bg"),
+						{
+							clipPath: "polygon(0 0, 100vw 0, 100vw 100%, 0 100%)",
+							backgroundColor: "#fff",
+						},
+						0,
+					).to(
+						q("bg"),
+						{
+							ease: "power4.inOut",
+							keyframes: [
+								{
+									clipPath: "polygon(0 0, 100vw 0, 100vw 100%, 0 100%)",
+									backgroundColor: "rgb(200 233 255)",
+									duration: 0.05,
+								},
+								{
+									// ① 準備（矩形→大三角形）: 短く
+									clipPath: "polygon(0 0, 100vw 0, 0% 100vw, 0 100%)",
+									backgroundColor: "rgb(200 233 255)",
+									duration: 0.1,
+									ease: "none",
+								},
+								{
+									// ② メイン（大三角形→小三角形）: 長く
+									clipPath: "polygon(0 0, 27dvw 0, 0% 27dvw, 0 0%)",
+									backgroundColor: "rgb(200 233 255)",
+									duration: 0.9,
+									ease: "none",
+								},
+								{
+									// ② メイン（大三角形→小三角形）: 長く
+									clipPath: "polygon(0 0, 30dvw 0, 0% 30dvw, 0 0%)",
+									duration: 0.3,
+									ease: "none",
+								},
+							],
+						},
+						0,
+					);
+				}
+			}
+		}, sectionRef);
+
+		return () => ctx.revert();
+	}, []);
+
 	return (
-		<Box>
+		<Box ref={sectionRef}>
 			{/* 概要セクション（青背景） */}
-			<Section
-				id="features"
-				bg="blue.800"
-				color="white"
-				position="relative"
-				backgroundImage={`url(${ab07})`}
-				backgroundSize="cover"
-				backgroundPosition="center"
-				_before={{
-					content: '""',
-					position: "absolute",
-					inset: 0,
-					bg: "blue.600/20",
-				}}
-			>
-				<Container maxW="breakpoint-xl" position="relative" zIndex={1}>
+			<Section id="features" color="gray.800" position="relative" overflow="hidden">
+				{/* パララックス背景レイヤー: 親より大きくして y 方向に移動させる */}
+				<Box ref={overviewBgRef} position="absolute" zIndex={0} overflow="hidden">
+					<Image
+						src={ab01}
+						position="absolute"
+						inset={0}
+						w="100%"
+						h="100%"
+						objectFit="cover"
+						objectPosition="center"
+					/>
+				</Box>
+				{/* オーバーレイ */}
+				{/* <Box position="absolute" inset={0} bg="blue.600/20" zIndex={1} /> */}
+				<Container maxW="breakpoint-xl" position="relative" zIndex={2}>
 					<SectionHeader
 						titleEn="FEATURES"
 						titleJa={
@@ -63,15 +175,15 @@ export function Features() {
 								が選ばれる理由
 							</Flex>
 						}
-						labelColor="white/40"
 						description={
 							<>最高峰の学習体験で、快適でありながら、深い理解をつちかいます。</>
 						}
-						descriptionColor="white/80"
+						labelColor="black/40"
+						descriptionColor="black/70"
 					/>
 
 					{/* 特徴カード */}
-					<Flex color="black" wrap="wrap" gap={3} justifyContent="center">
+					<Flex ref={cardsRef} color="black" wrap="wrap" gap={3} justifyContent="center">
 						<FeatureSummaryCard index={0}>
 							<Mark>問題集×用語集×参考書</Mark>
 							の役割をアプリ1つに凝縮。一つのアプリで横断的に学べるから、
@@ -115,7 +227,7 @@ export function Features() {
 					</Flex>
 
 					{/* 注釈 */}
-					<Text variant="labelMd" color="white" my={8} textAlign="center">
+					<Text variant="labelMd" color="black/70" my={8} textAlign="center">
 						※ 学習アプリの解説の平均文字数を比較。（Antares Works調べ）
 						LYNXは、地理・歴史・公民分野を合計して300万字以上のコンテンツを収録しています。
 					</Text>

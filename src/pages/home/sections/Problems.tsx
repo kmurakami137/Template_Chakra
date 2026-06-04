@@ -20,6 +20,7 @@ import type { ReactNode } from "react";
 import { MdArrowDropDown } from "react-icons/md";
 import LynxLogo from "../../../assets/Lynx-Logo.svg?react";
 import { Br, Section, SectionHeader } from "../../../components";
+import { useStaggerReveal } from "../../../hooks/useStaggerReveal";
 
 // ラッパー
 function ProblemCard({
@@ -56,6 +57,8 @@ function CardItem({ children }: { children: ReactNode }) {
 }
 
 export function Problems() {
+	const cardsRef = useStaggerReveal<HTMLDivElement>({ stagger: 0.12, distance: 30, duration: 0.6 });
+
 	return (
 		<Section id="problems" bg="gray.200/80" backgroundSize="cover" backgroundPosition="center">
 			<Container maxW="breakpoint-xl">
@@ -68,6 +71,7 @@ export function Problems() {
 
 				{/* 3つの課題カード */}
 				<Grid
+					ref={cardsRef}
 					templateColumns={{
 						base: "1fr",
 						sm: "repeat(2, 1fr)",
