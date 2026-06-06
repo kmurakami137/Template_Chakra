@@ -21,7 +21,7 @@ import {
 	Text,
 	useBreakpointValue,
 } from "@chakra-ui/react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Br } from "../components";
 import type { ExplanationExample, ExplanationExamples } from "../data/explanation";
 import { parseComment } from "../utils/parseComment";
@@ -74,6 +74,15 @@ const subjects = [
 ];
 
 function ExplanationCard({ example }: ExplanationCardProps) {
+	const viewportRef = useRef<HTMLDivElement>(null);
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: example変化時にスクロールをリセットするための意図的な依存
+	useEffect(() => {
+		if (viewportRef.current) {
+			viewportRef.current.scrollTop = 0;
+		}
+	}, [example]);
+
 	if (!example) {
 		return (
 			<Box bg="gray.50" p={6} borderRadius="lg" shadow="md">
@@ -86,7 +95,7 @@ function ExplanationCard({ example }: ExplanationCardProps) {
 		<Flex
 			direction="column"
 			bg="white"
-			w={{ base: "full", lg: "45dvw" }}
+			w={{ base: "full", lg: "560px" }}
 			h={{ base: "full", lg: "560px" }}
 			p={7}
 			borderRadius="lg"
@@ -121,7 +130,7 @@ function ExplanationCard({ example }: ExplanationCardProps) {
 
 			{/* 解説本文 */}
 			<ScrollArea.Root flexGrow={1} variant="always" size="xs" mt={4}>
-				<ScrollArea.Viewport paddingEnd="3">
+				<ScrollArea.Viewport ref={viewportRef} paddingEnd="3">
 					<ScrollArea.Content paddingEnd="3" textStyle="sm">
 						{parseComment(example.comment)}
 					</ScrollArea.Content>

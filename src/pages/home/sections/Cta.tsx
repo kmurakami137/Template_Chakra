@@ -18,6 +18,7 @@ export function Cta() {
 					titleJa="さあ、はじめよう！"
 					description="無料でダウンロードして中学社会をマスターしよう。"
 					descriptionColor="white/80"
+					align="center"
 				/>
 				<HStack justify="center" gap={4} flexWrap="wrap" mt={10} mb={10}>
 					<Box

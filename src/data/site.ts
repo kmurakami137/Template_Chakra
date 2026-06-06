@@ -97,7 +97,7 @@ export const NAV_ITEMS = [
 	{ labelEn: "ABOUT", labelJa: "LYNXについて", href: "#about" },
 	{ labelEn: "FEATURES", labelJa: "選ばれる理由", href: "#features" },
 	{ labelEn: "VOICES", labelJa: "ユーザーの声", href: "#voices" },
-	{ labelEn: "FAQ", labelJa: "よくある質問", href: "#faq" },
+	// { labelEn: "FAQ", labelJa: "よくある質問", href: "#faq" },
 ] as const;
 
 // ============================================

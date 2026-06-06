@@ -9,8 +9,13 @@ type SectionHeaderProps = {
 	titleJa: ReactNode;
 	/** オプショナル説明文 */
 	description?: ReactNode;
-	/** テキスト揃え（デフォルト: center） */
-	align?: "start" | "center";
+	/**
+	 * テキスト揃え（デフォルト: "center-md"）
+	 * - "start"      : 左揃え（全breakpoint）
+	 * - "center-md"  : 見出しcenter / description は md以上でcenter、base は左揃え
+	 * - "center"     : 全体center（全breakpoint）
+	 */
+	align?: "start" | "center-md" | "center";
 	/** 下マージン（デフォルト: 10） */
 	mb?: BoxProps["mb"];
 	/** 英字ラベルの色（デフォルト: gray.300） */
@@ -25,7 +30,7 @@ export function SectionHeader({
 	titleEn,
 	titleJa,
 	description,
-	align = "center",
+	align = "center-md",
 	mb = 10,
 	labelColor = "gray.300",
 	titleColor,
@@ -35,8 +40,12 @@ export function SectionHeader({
 	const titleRef = useScrollReveal({ from: "bottom", distance: 30, duration: 0.6, delay: 0.25 });
 	const descRef = useScrollReveal({ from: "bottom", distance: 20, duration: 0.6, delay: 0.5 });
 
+	const resolvedAlign = align === "center-md" ? "center" : align;
+	const descAlign =
+		align === "center-md" ? { base: "left", md: "center" } : align;
+
 	return (
-		<Box mb={mb} textAlign={align}>
+		<Box mb={mb} textAlign={resolvedAlign}>
 			{titleEn && (
 				<Text
 					ref={labelRef}
@@ -65,7 +74,7 @@ export function SectionHeader({
 					ref={descRef}
 					variant="bodyMd"
 					mt={4}
-					textAlign={{ base: "left", md: align }}
+					textAlign={descAlign}
 					color={descriptionColor}
 				>
 					{description}
