@@ -22,6 +22,16 @@ export function HomePage() {
 		Promise.all([document.fonts.ready, minDelay]).then(() => setFontsReady(true));
 	}, []);
 
+	useEffect(() => {
+		const script = document.createElement("script");
+		script.type = "application/ld+json";
+		script.text = JSON.stringify(generateJsonLd());
+		document.head.appendChild(script);
+		return () => {
+			document.head.removeChild(script);
+		};
+	}, []);
+
 	const handleLoadingExitComplete = useCallback(() => {
 		setHeroReady(true);
 		setShowLoadingScreen(false);
@@ -44,10 +54,9 @@ export function HomePage() {
 				<meta name="twitter:title" content={SITE.name} />
 				<meta name="twitter:description" content={SITE.description} />
 				<meta name="twitter:image" content={getAbsoluteUrl(SITE.ogImage)} />
-				{SEO.googleSiteVerification && (
+				{SEO.googleSiteVerification ? (
 					<meta name="google-site-verification" content={SEO.googleSiteVerification} />
-				)}
-				<script type="application/ld+json">{JSON.stringify(generateJsonLd())}</script>
+				) : null}
 			</Helmet>
 			{showLoadingScreen && (
 				<LoadingScreen isReady={fontsReady} onExitComplete={handleLoadingExitComplete} />
