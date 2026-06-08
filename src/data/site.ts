@@ -161,35 +161,36 @@ export const getCopyright = () => {
 // URL
 // ============================================
 
-/** JSON-LD 構造化データを生成（WebSite + MobileApplication × 3） */
-export const generateStructuredData = () => {
+/** JSON-LD 構造化データを生成（@graph パターン：WebSite + MobileApplication × 3） */
+export const generateJsonLd = () => {
 	const appSubjects = [
 		{ label: "歴史", android: APP_STORE.android.history, ios: APP_STORE.ios.history },
 		{ label: "地理", android: APP_STORE.android.geography, ios: APP_STORE.ios.geography },
 		{ label: "公民", android: APP_STORE.android.civics, ios: APP_STORE.ios.civics },
 	];
 
-	return [
-		{
-			"@context": "https://schema.org",
-			"@type": "WebSite",
-			name: SITE.name,
-			url: SITE.url,
-			description: SITE.description,
-			inLanguage: SITE.lang,
-			publisher: { "@type": "Organization", name: OWNER.nameEn },
-		},
-		...appSubjects.map((subject) => ({
-			"@context": "https://schema.org",
-			"@type": "MobileApplication",
-			name: `${SITE.name} ${subject.label}`,
-			operatingSystem: "Android, iOS",
-			applicationCategory: "EducationApplication",
-			inLanguage: SITE.lang,
-			offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
-			installUrl: [subject.android, subject.ios],
-		})),
-	];
+	return {
+		"@context": "https://schema.org",
+		"@graph": [
+			{
+				"@type": "WebSite",
+				name: SITE.name,
+				url: SITE.url,
+				description: SITE.description,
+				inLanguage: SITE.lang,
+				publisher: { "@type": "Organization", name: OWNER.nameEn },
+			},
+			...appSubjects.map((subject) => ({
+				"@type": "MobileApplication",
+				name: `${SITE.name} ${subject.label}`,
+				operatingSystem: "Android, iOS",
+				applicationCategory: "EducationApplication",
+				inLanguage: SITE.lang,
+				offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+				installUrl: [subject.android, subject.ios],
+			})),
+		],
+	};
 };
 
 /** OGP用の絶対URLを生成 */

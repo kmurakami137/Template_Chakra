@@ -8,7 +8,7 @@ import { Box } from "@chakra-ui/react";
 import { Helmet } from "react-helmet-async";
 import { useCallback, useEffect, useState } from "react";
 import { Footer, Header, LoadingScreen } from "../../components";
-import { SEO, SITE, generateStructuredData, getAbsoluteUrl } from "../../data/site";
+import { SEO, SITE, generateJsonLd, getAbsoluteUrl } from "../../data/site";
 import { Cta, Features, Hero, Intro, Problems, Reviews } from "./sections";
 
 export function HomePage() {
@@ -47,12 +47,7 @@ export function HomePage() {
 				{SEO.googleSiteVerification && (
 					<meta name="google-site-verification" content={SEO.googleSiteVerification} />
 				)}
-				{generateStructuredData().map((schema, i) => (
-					// biome-ignore lint/suspicious/noArrayIndexKey: スキーマは固定順で変化しないため問題なし
-					<script key={i} type="application/ld+json">
-						{JSON.stringify(schema)}
-					</script>
-				))}
+				<script type="application/ld+json">{JSON.stringify(generateJsonLd())}</script>
 			</Helmet>
 			{showLoadingScreen && (
 				<LoadingScreen isReady={fontsReady} onExitComplete={handleLoadingExitComplete} />
