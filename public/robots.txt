@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://lynx-study.pages.dev/sitemap.xml

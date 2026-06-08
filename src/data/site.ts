@@ -49,7 +49,7 @@ export const SITE = {
 	seriesName: "LYNXシリーズ",
 	description:
 		"中学社会（歴史・地理・公民）の勉強アプリLYNX（リンクス）。社会科アプリNo.1の詳しい解説で、暗記だけでなく「つながり」まで理解できます。定期テスト・高校受験対策に。問題集×用語集×参考書が1つに。",
-	url: "https://antares-works.com",
+	url: "https://lynx-study.pages.dev",
 	lang: "ja",
 	ogImage: "/images/og-image.jpg",
 	keywords: [
@@ -160,6 +160,37 @@ export const getCopyright = () => {
 // ============================================
 // URL
 // ============================================
+
+/** JSON-LD 構造化データを生成（WebSite + MobileApplication × 3） */
+export const generateStructuredData = () => {
+	const appSubjects = [
+		{ label: "歴史", android: APP_STORE.android.history, ios: APP_STORE.ios.history },
+		{ label: "地理", android: APP_STORE.android.geography, ios: APP_STORE.ios.geography },
+		{ label: "公民", android: APP_STORE.android.civics, ios: APP_STORE.ios.civics },
+	];
+
+	return [
+		{
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			name: SITE.name,
+			url: SITE.url,
+			description: SITE.description,
+			inLanguage: SITE.lang,
+			publisher: { "@type": "Organization", name: OWNER.nameEn },
+		},
+		...appSubjects.map((subject) => ({
+			"@context": "https://schema.org",
+			"@type": "MobileApplication",
+			name: `${SITE.name} ${subject.label}`,
+			operatingSystem: "Android, iOS",
+			applicationCategory: "EducationApplication",
+			inLanguage: SITE.lang,
+			offers: { "@type": "Offer", price: "0", priceCurrency: "JPY" },
+			installUrl: [subject.android, subject.ios],
+		})),
+	];
+};
 
 /** OGP用の絶対URLを生成 */
 export const getAbsoluteUrl = (path: string) => {

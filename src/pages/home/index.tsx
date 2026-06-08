@@ -8,7 +8,7 @@ import { Box } from "@chakra-ui/react";
 import { Helmet } from "react-helmet-async";
 import { useCallback, useEffect, useState } from "react";
 import { Footer, Header, LoadingScreen } from "../../components";
-import { SEO, SITE, getAbsoluteUrl } from "../../data/site";
+import { SEO, SITE, generateStructuredData, getAbsoluteUrl } from "../../data/site";
 import { Cta, Features, Hero, Intro, Problems, Reviews } from "./sections";
 
 export function HomePage() {
@@ -32,6 +32,7 @@ export function HomePage() {
 			<Helmet>
 				<title>{SITE.name}</title>
 				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+				<link rel="canonical" href={SITE.url} />
 				<meta name="description" content={SITE.description} />
 				<meta name="keywords" content={SITE.keywords.join(", ")} />
 				<meta property="og:type" content="website" />
@@ -43,6 +44,15 @@ export function HomePage() {
 				<meta name="twitter:title" content={SITE.name} />
 				<meta name="twitter:description" content={SITE.description} />
 				<meta name="twitter:image" content={getAbsoluteUrl(SITE.ogImage)} />
+				{SEO.googleSiteVerification && (
+					<meta name="google-site-verification" content={SEO.googleSiteVerification} />
+				)}
+				{generateStructuredData().map((schema, i) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: スキーマは固定順で変化しないため問題なし
+					<script key={i} type="application/ld+json">
+						{JSON.stringify(schema)}
+					</script>
+				))}
 			</Helmet>
 			{showLoadingScreen && (
 				<LoadingScreen isReady={fontsReady} onExitComplete={handleLoadingExitComplete} />
