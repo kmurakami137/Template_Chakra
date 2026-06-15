@@ -18,7 +18,7 @@ export const SEO = {
 	titleSeparator: " | ",
 	twitterHandle: "",
 	twitterCardType: "summary_large_image" as const,
-	googleSiteVerification: "",
+	googleSiteVerification: "ybG_3ewQK-xEnzomqB4jjYVCx8LSWwTQ7ZUzT9B5Hz0",
 	bingSiteVerification: "",
 } as const;
 
