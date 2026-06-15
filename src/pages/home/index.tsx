@@ -54,9 +54,6 @@ export function HomePage() {
 				<meta name="twitter:title" content={SITE.name} />
 				<meta name="twitter:description" content={SITE.description} />
 				<meta name="twitter:image" content={getAbsoluteUrl(SITE.ogImage)} />
-				{SEO.googleSiteVerification ? (
-					<meta name="google-site-verification" content={SEO.googleSiteVerification} />
-				) : null}
 			</Helmet>
 			{showLoadingScreen && (
 				<LoadingScreen isReady={fontsReady} onExitComplete={handleLoadingExitComplete} />
